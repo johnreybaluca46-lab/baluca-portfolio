@@ -1,0 +1,696 @@
+.skills-page-section {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffff; /* Top part is white */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-page-section.show {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.skills-header-container {
+  padding-top: 120px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.skills-title-content {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2rem;
+  height: 4.5rem;
+}
+
+.skills-title-content h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  color: #fff;
+}
+
+.skills-title-content h2:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 2px #1e90ff;
+}
+
+.skills-title-content h2:nth-child(2) {
+  color: #1e90ff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: liquid-animate 4s ease-in-out infinite;
+}
+
+@keyframes liquid-animate {
+  0%, 100% {
+    clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+  }
+  50% {
+    clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+  }
+}
+
+/* Smaller modifier for subtitles using the same liquid effect */
+.skills-title-small {
+  height: 2.5rem;
+  margin-bottom: 0;
+}
+.skills-title-small h2 {
+  font-size: 1.8rem;
+}
+.skills-title-small h2:nth-child(1) {
+  -webkit-text-stroke: 1.5px #1e90ff;
+}
+
+/* Anime.js splitText – each character span */
+.skills-subtitle .char,
+.ide-section-title h3 .char {
+  display: inline-block;
+  will-change: transform;
+  position: relative;
+  z-index: 999;
+}
+
+.skills-subtitle,
+.ide-section-title h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1e90ff;
+  text-transform: capitalize;
+  /* leave space above so bouncing chars don't clip */
+  padding-top: 2.75rem;
+  margin-top: -2.75rem;
+}
+
+/* Roadmap Grid System */
+.roadmap-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.roadmap-level {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+/* Connecting Lines (Explicit tree structure) */
+.road-line {
+  position: absolute;
+  background-color: #222; /* Black road lines */
+  z-index: 0;
+  border-radius: 2px;
+}
+
+/* ── Skills Flexbox Layout (Auto-centers incomplete rows) ── */
+.skills-grid-wrapper {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.skills-grid-5col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* White lines only for the central spine passing through the blue water */
+.water-line {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+
+/* --- 3D Flip Card Styles --- */
+.skill-card-container {
+  perspective: 1000px;
+  width: 220px;
+  height: 294px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.skill-card-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 500ms;
+  position: relative;
+  border-radius: 5px;
+}
+
+.skill-card-container:hover .skill-card-inner {
+  transform: rotateY(180deg);
+}
+
+.skill-card-front, .skill-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* FRONT FACE (White with blue accents) */
+.skill-card-front {
+  background-color: #ffffff;
+  transform: rotateY(0deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0.5rem;
+  border: 1px solid #e0e0e0;
+}
+
+/* Pseudo-elements for the blue corner brackets */
+.skill-card-front::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 30px; height: 30px;
+  border-top: 3px solid #1e90ff;
+  border-left: 3px solid #1e90ff;
+}
+.skill-card-front::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 30px; height: 30px;
+  border-bottom: 3px solid #1e90ff;
+  border-right: 3px solid #1e90ff;
+}
+
+.skill-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-top: 15px;
+}
+
+.skill-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 10px 0;
+}
+
+.skill-name {
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: #1e90ff;
+  margin: 0;
+}
+
+/* BACK FACE (Dark theme with glowing border) */
+.skill-card-back {
+  background-color: #151515;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px 1px #000000ee;
+}
+
+/* Glowing border effect from user */
+.glow-bg {
+  position: absolute;
+  width: 160%;
+  height: 160%;
+  background: linear-gradient(90deg, transparent, #ff9966, #ff9966, #ff9966, #ff9966, transparent);
+  animation: rotation_481 5000ms infinite linear;
+  z-index: 0;
+}
+
+/* Change glow to dodgerblue to match theme better, or keep original? 
+   User code had #ff9966 (orange), but theme is dodgerblue. Let's make it dodgerblue. */
+.skill-card-back .glow-bg {
+  background: linear-gradient(90deg, transparent, #1e90ff, #00bfff, #1e90ff, #1e90ff, transparent);
+}
+
+.skill-back-content {
+  position: absolute;
+  width: 96%;
+  height: 96%;
+  background-color: #151515;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 1;
+}
+
+.skill-badge {
+  background-color: #cccccc;
+  color: #1e90ff;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.skill-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  flex-grow: 1;
+  text-align: justify;
+}
+
+.skill-progress-box {
+  background-color: #cccccc;
+  border-radius: 5px;
+  padding: 8px;
+  margin-top: auto;
+  position: relative;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.progress-header span {
+  font-size: 0.75rem;
+  color: #1e90ff;
+  font-weight: bold;
+}
+
+.progress-header img {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 4px;
+  background-color: #151515;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #1e90ff;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  color: #1e90ff;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+@keyframes rotation_481 {
+  0% { transform: rotateZ(0deg); }
+  100% { transform: rotateZ(360deg); }
+}
+
+/* Background Sections (Water and Sand) */
+
+/* To make the water and sand sections work, we need them to wrap the lower elements */
+.skills-water-transition-zone {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+/* Use the existing wave pattern at the top of the water zone */
+.water-waves-container {
+  width: 100%;
+  position: relative;
+  line-height: 0;
+  z-index: 1; /* Below cards, above lines */
+}
+
+.water-waves-container .waves {
+  width: 100%;
+  height: 15vh;
+  min-height: 100px;
+  max-height: 150px;
+}
+
+.skills-underwater-bg {
+  background-color: dodgerblue;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 0;
+}
+
+/* Override line colors in the water */
+.skills-underwater-bg .roadmap-level::after,
+.skills-underwater-bg .level-connection-horizontal {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.skills-sand-floor {
+  background-color: #A07855;
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+  position: relative;
+  z-index: 10;
+  overflow: visible;
+}
+
+/* Copyright footer inside sand */
+.skills-copyright-footer {
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1.5rem 0 2rem;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 5;
+}
+
+/* Curved sand mound — the rounded hill at the top of the sand */
+.skills-sand-mound {
+  width: 120%;
+  margin-left: -10%;
+  height: 150px;
+  background-color: #A07855;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  position: relative;
+  margin-top: -140px;
+  z-index: 2;
+}
+
+/* IDE Section */
+.ide-section-title {
+  text-align: center;
+  color: white;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+.ide-section-title h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Reusing fishes and seaweeds from AboutMePage styling */
+.skills-swimming-fish {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+}
+.skills-fish-big  { width: 220px; z-index: 999; }
+.skills-fish-small { width: 120px; z-index: 5; }
+
+.skills-fish-1 {
+  top: 10%;
+  left: -250px;
+  animation: swim-right 22s linear infinite;
+}
+.skills-fish-2 {
+  top: 40%;
+  right: -250px;
+  animation: swim-left 28s linear infinite;
+}
+.skills-fish-3 {
+  top: 60%;
+  left: -250px;
+  animation: swim-right 25s linear infinite 5s;
+}
+.skills-fish-4 {
+  top: 20%;
+  right: -250px;
+  animation: swim-left 35s linear infinite 2s;
+}
+
+/* Seaweeds — positioned on the curved sand mound surface */
+.skills-seaweed {
+  position: absolute;
+  width: 160px;
+  z-index: 3;
+  transform-origin: bottom center;
+}
+/* The curve is highest at center, lower at edges.
+   top values mirror the curve arc so seaweed appear to grow from the sand surface. */
+.skills-seaweed-1 { left: 5%;  bottom: 20px; }
+.skills-seaweed-2 { left: 23%; bottom: 85px; transform: scale(1.1); }
+.skills-seaweed-3 { left: 46%; bottom: 130px; transform: scale(1.3); }
+.skills-seaweed-4 { left: 68%; bottom: 85px; }
+.skills-seaweed-5 { right: 3%; bottom: 10px; transform: scale(0.9); }
+
+/* Swim keyframes (mirrors AboutMePage) */
+@keyframes swim-right {
+  0%   { transform: translate(0, 0) scaleX(1); }
+  25%  { transform: translate(30vw, -20px) scaleX(1); }
+  49%  { transform: translate(120vw, 10px) scaleX(1); }
+  50%  { transform: translate(120vw, 10px) scaleX(-1); }
+  75%  { transform: translate(30vw, -10px) scaleX(-1); }
+  99%  { transform: translate(0, 20px) scaleX(-1); }
+  100% { transform: translate(0, 0) scaleX(1); }
+}
+
+@keyframes swim-left {
+  0%   { transform: translate(0, 0) scaleX(-1); }
+  25%  { transform: translate(-30vw, 20px) scaleX(-1); }
+  49%  { transform: translate(-120vw, -10px) scaleX(-1); }
+  50%  { transform: translate(-120vw, -10px) scaleX(1); }
+  75%  { transform: translate(-30vw, -20px) scaleX(1); }
+  99%  { transform: translate(0, 10px) scaleX(1); }
+  100% { transform: translate(0, 0) scaleX(-1); }
+}
+
+/* ══════════════════════════════════════════
+   UI EDITOR SECTION
+══════════════════════════════════════════ */
+.ui-editor-section {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.threed-cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 28px;
+}
+
+/* ══════════════════════════════════════════
+   3D CARD — exact match to user's code
+══════════════════════════════════════════ */
+.threed-parent {
+  width: 360px;
+  min-width: 280px;
+  flex: 1 1 0;
+  max-width: 400px;
+  padding: 16px;
+  perspective: 1200px;
+}
+
+.threed-card {
+  padding-top: 50px;
+  border: 3px solid #141414;
+  transform-style: preserve-3d;
+  background: linear-gradient(135deg, #0000 18.75%, #f3f3f3 0 31.25%, #0000 0),
+    repeating-linear-gradient(45deg, #f3f3f3 -6.25% 6.25%, #141414 0 18.75%);
+  background-size: 60px 60px;
+  background-position: 0 0, 0 0;
+  background-color: #141414;
+  width: 100%;
+  box-shadow: rgba(142, 142, 142, 0.3) 0px 30px 30px -10px;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+}
+
+.threed-card:hover {
+  background-position: -100px 100px, -100px 100px;
+  transform: rotate3d(0.5, 1, 0, 30deg);
+}
+
+.threed-content-box {
+  background: #ffffff;
+  transition: all 0.5s ease-in-out;
+  padding: 60px 25px 25px 25px;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.threed-card-title {
+  display: inline-block;
+  color: #1e90ff;
+  font-size: 30px;
+  font-weight: 900;
+  transition: all 0.5s ease-in-out;
+  transform: translate3d(0px, 0px, 50px);
+}
+
+.threed-card-title:hover {
+  transform: translate3d(0px, 0px, 60px);
+}
+
+.threed-card-content {
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: #333333;
+  transition: all 0.5s ease-in-out;
+  transform: translate3d(0px, 0px, 30px);
+  text-align: left;
+}
+
+.threed-card-content:hover {
+  transform: translate3d(0px, 0px, 60px);
+}
+
+.threed-see-more {
+  cursor: pointer;
+  margin-top: 1.5rem;
+  display: inline-block;
+  font-weight: 900;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #1e90ff;
+  background: #141414;
+  padding: 0.8rem 1rem;
+  transition: all 0.5s ease-in-out;
+  transform: translate3d(0px, 0px, 20px);
+}
+
+.threed-see-more:hover {
+  transform: translate3d(0px, 0px, 60px);
+}
+
+.threed-icon-box {
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  height: 70px;
+  width: 70px;
+  background: #141414;
+  border: 1px solid #1e90ff;
+  padding: 12px;
+  transform: translate3d(0px, 0px, 80px);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 17px 10px -10px;
+  border-radius: 14px;
+}
+
+.threed-floating-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ══════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════ */
+.threed-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+
+.threed-modal {
+  background: #1a1a1a;
+  border: 2px solid #1e90ff;
+  max-width: 520px;
+  width: 90%;
+  padding: 2.5rem 2rem;
+  position: relative;
+  box-shadow: 0 0 40px rgba(30, 144, 255, 0.3);
+  animation: scaleIn 0.25s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.threed-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: #1e90ff;
+  border: none;
+  color: #141414;
+  font-size: 1rem;
+  font-weight: 900;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.threed-modal-close:hover {
+  background: #00bfff;
+}
+
+.threed-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.threed-modal-icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.threed-modal-header h2 {
+  color: #1e90ff;
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.threed-modal-text {
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin: 0;
+  text-align: justify;
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Baluca-Portfolio</string>
+    <string name="title_activity_main">Baluca-Portfolio</string>
+    <string name="package_name">com.MyPortfolio.app</string>
+    <string name="custom_url_scheme">com.MyPortfolio.app</string>
+</resources>

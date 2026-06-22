@@ -1,0 +1,557 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+
+.homepage-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+
+.homepage-container.show {
+  opacity: 1;
+}
+
+.left-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  color: #fff;
+  position: relative;
+  z-index: 10;
+  border-right: 12px solid #1e90ff;
+}
+
+.right-section {
+  flex: 1;
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* Custom Nav */
+.nav-container {
+  position: absolute;
+  top: 3rem;
+  left: 1.5rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+}
+
+.nav-pill {
+  background-color: #1e90ff;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+}
+
+.nav-pill.expanded {
+  width: auto;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+}
+
+.nav-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  background: dodgerblue;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-radius: 50%;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 10px rgba(30, 144, 255, 0.45);
+}
+
+.nav-icon:hover {
+  background: #1a7de0;
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(30, 144, 255, 0.6);
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: 1rem;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.nav-pill.expanded .nav-links {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  opacity: 0.9;
+}
+
+/* Matrix Animation */
+.matrix-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  z-index: 1;
+}
+
+.matrix-pattern {
+  position: relative;
+  width: 1000px;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.matrix-column {
+  position: absolute;
+  top: -100%;
+  width: 20px;
+  height: 100%;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: bold;
+  animation: fall linear infinite;
+  white-space: nowrap;
+}
+
+.matrix-column::before {
+  content: "BALUCA BALUCA BALUCA ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom,
+      #1E90FF 0%,
+      #1E90FF 5%,
+      #1E90FF 10%,
+      #1E90FF 20%,
+      #1E90FF 30%,
+      #1E90FF 40%,
+      #1E90FF 50%,
+      #1E90FF 60%,
+      #1E90FF 70%,
+      #1E90FF 80%,
+      rgba(12, 56, 100, 0.5) 90%,
+      transparent 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  writing-mode: vertical-lr;
+  letter-spacing: 1px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.matrix-column:nth-child(1) {
+  left: 0px;
+  animation-delay: -2.5s;
+  animation-duration: 3s;
+}
+
+.matrix-column:nth-child(2) {
+  left: 25px;
+  animation-delay: -3.2s;
+  animation-duration: 4s;
+}
+
+.matrix-column:nth-child(3) {
+  left: 50px;
+  animation-delay: -1.8s;
+  animation-duration: 2.5s;
+}
+
+.matrix-column:nth-child(4) {
+  left: 75px;
+  animation-delay: -2.9s;
+  animation-duration: 3.5s;
+}
+
+.matrix-column:nth-child(5) {
+  left: 100px;
+  animation-delay: -1.5s;
+  animation-duration: 3s;
+}
+
+.matrix-column:nth-child(6) {
+  left: 125px;
+  animation-delay: -3.8s;
+  animation-duration: 4.5s;
+}
+
+.matrix-column:nth-child(7) {
+  left: 150px;
+  animation-delay: -2.1s;
+  animation-duration: 2.8s;
+}
+
+.matrix-column:nth-child(8) {
+  left: 175px;
+  animation-delay: -2.7s;
+  animation-duration: 3.2s;
+}
+
+.matrix-column:nth-child(9) {
+  left: 200px;
+  animation-delay: -3.4s;
+  animation-duration: 3.8s;
+}
+
+.matrix-column:nth-child(10) {
+  left: 225px;
+  animation-delay: -1.9s;
+  animation-duration: 2.7s;
+}
+
+.matrix-column:nth-child(11) {
+  left: 250px;
+  animation-delay: -3.6s;
+  animation-duration: 4.2s;
+}
+
+.matrix-column:nth-child(12) {
+  left: 275px;
+  animation-delay: -2.3s;
+  animation-duration: 3.1s;
+}
+
+.matrix-column:nth-child(13) {
+  left: 300px;
+  animation-delay: -3.1s;
+  animation-duration: 3.6s;
+}
+
+.matrix-column:nth-child(14) {
+  left: 325px;
+  animation-delay: -2.6s;
+  animation-duration: 2.9s;
+}
+
+.matrix-column:nth-child(15) {
+  left: 350px;
+  animation-delay: -3.7s;
+  animation-duration: 4.1s;
+}
+
+.matrix-column:nth-child(16) {
+  left: 375px;
+  animation-delay: -2.8s;
+  animation-duration: 3.3s;
+}
+
+.matrix-column:nth-child(17) {
+  left: 400px;
+  animation-delay: -3.3s;
+  animation-duration: 3.7s;
+}
+
+.matrix-column:nth-child(18) {
+  left: 425px;
+  animation-delay: -2.2s;
+  animation-duration: 2.6s;
+}
+
+.matrix-column:nth-child(19) {
+  left: 450px;
+  animation-delay: -3.9s;
+  animation-duration: 4.3s;
+}
+
+.matrix-column:nth-child(20) {
+  left: 475px;
+  animation-delay: -2.4s;
+  animation-duration: 3.4s;
+}
+
+.matrix-column:nth-child(21) {
+  left: 500px;
+  animation-delay: -1.7s;
+  animation-duration: 2.4s;
+}
+
+.matrix-column:nth-child(22) {
+  left: 525px;
+  animation-delay: -3.5s;
+  animation-duration: 3.9s;
+}
+
+.matrix-column:nth-child(23) {
+  left: 550px;
+  animation-delay: -2s;
+  animation-duration: 3s;
+}
+
+.matrix-column:nth-child(24) {
+  left: 575px;
+  animation-delay: -4s;
+  animation-duration: 4.4s;
+}
+
+.matrix-column:nth-child(25) {
+  left: 600px;
+  animation-delay: -1.6s;
+  animation-duration: 2.3s;
+}
+
+.matrix-column:nth-child(26) {
+  left: 625px;
+  animation-delay: -3s;
+  animation-duration: 3.5s;
+}
+
+.matrix-column:nth-child(27) {
+  left: 650px;
+  animation-delay: -3.8s;
+  animation-duration: 4s;
+}
+
+.matrix-column:nth-child(28) {
+  left: 675px;
+  animation-delay: -2.5s;
+  animation-duration: 2.8s;
+}
+
+.matrix-column:nth-child(29) {
+  left: 700px;
+  animation-delay: -3.2s;
+  animation-duration: 3.6s;
+}
+
+.matrix-column:nth-child(30) {
+  left: 725px;
+  animation-delay: -2.7s;
+  animation-duration: 3.2s;
+}
+
+.matrix-column:nth-child(31) {
+  left: 750px;
+  animation-delay: -1.8s;
+  animation-duration: 2.7s;
+}
+
+.matrix-column:nth-child(32) {
+  left: 775px;
+  animation-delay: -3.6s;
+  animation-duration: 4.1s;
+}
+
+.matrix-column:nth-child(33) {
+  left: 800px;
+  animation-delay: -2.1s;
+  animation-duration: 3.1s;
+}
+
+.matrix-column:nth-child(34) {
+  left: 825px;
+  animation-delay: -3.4s;
+  animation-duration: 3.7s;
+}
+
+.matrix-column:nth-child(35) {
+  left: 850px;
+  animation-delay: -2.8s;
+  animation-duration: 2.9s;
+}
+
+.matrix-column:nth-child(36) {
+  left: 875px;
+  animation-delay: -3.7s;
+  animation-duration: 4.2s;
+}
+
+.matrix-column:nth-child(37) {
+  left: 900px;
+  animation-delay: -2.3s;
+  animation-duration: 3.3s;
+}
+
+.matrix-column:nth-child(38) {
+  left: 925px;
+  animation-delay: -1.9s;
+  animation-duration: 2.5s;
+}
+
+.matrix-column:nth-child(39) {
+  left: 950px;
+  animation-delay: -3.5s;
+  animation-duration: 3.8s;
+}
+
+.matrix-column:nth-child(40) {
+  left: 975px;
+  animation-delay: -2.6s;
+  animation-duration: 3.4s;
+}
+
+.matrix-column:nth-child(odd)::before {
+  content: "ッ!@#$%^&*()_+-=[]{}|;:,.<>? BALUCA BALUCA BALUCA BALUCA BALUCA BALUCA BALUCA BALUCA 123456789";
+}
+
+.matrix-column:nth-child(even)::before {
+  content: "ッ!@#$%^&*()_+-=[]{}|;:,.<>? JOHNREY V. BALUCA BALUCA BALUCA BALUCA BALUCA ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+}
+
+.matrix-column:nth-child(3n)::before {
+  content: "BALUCA 0987654321 BALUCA BALUCA ッ!@#$%^&*()_+-=[]{}|;:,.<>?";
+}
+
+.matrix-column:nth-child(4n)::before {
+  content: "BALUCA BALUCA BALUCA ッ!@#$%^&*()_+-=[]{}|;:,.<>?";
+}
+
+.matrix-column:nth-child(5n)::before {
+  content: "BALUCA JOHNREYッ!@#$%^&*()_+-=[]{}|;:,.<>?ッ!@#$%^&*()_+-=[]{}|;:,.<>?ッ!@#$%^&*()_+-=[]{}|;:,.<>?ッ!@#$%^&*()_+-=[]{}|;:,.<>?";
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+}
+
+.profile-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.profile-image {
+  height: 80%;
+  width: auto;
+  object-fit: contain;
+  transform: scale(1.15);
+  transform-origin: bottom center;
+  /* Add subtle shadow to pop out from background */
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
+}
+
+@media (max-width: 768px) {
+  .homepage-container {
+    flex-direction: column;
+  }
+
+  .left-section,
+  .right-section {
+    flex: none;
+    height: 50vh;
+  }
+
+  .left-section {
+    padding: 2rem;
+    border-right: none;
+    border-bottom: 12px solid #1e90ff;
+  }
+
+  .matrix-column {
+    font-size: 14px;
+    line-height: 16px;
+    width: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .matrix-column {
+    font-size: 12px;
+    line-height: 14px;
+    width: 15px;
+  }
+}
+
+/* Animated HOME title */
+.home-title-content {
+  position: relative;
+  height: 4.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-title-content h2 {
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.home-title-content h2:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 2px #1e90ff;
+}
+
+.home-title-content h2:nth-child(2) {
+  color: #1e90ff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: liquid-animate 4s ease-in-out infinite;
+}
+
+@keyframes liquid-animate {
+
+  0%,
+  100% {
+    clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+  }
+
+  50% {
+    clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+  }
+}
