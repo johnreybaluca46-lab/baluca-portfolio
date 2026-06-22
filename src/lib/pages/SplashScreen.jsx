@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import logoImg from '../../assets/logo/Baluca-portpolio logo.png';
 
 const SplashScreen = ({ onComplete }) => {
   const [mounted, setMounted] = useState(false);
@@ -171,7 +172,7 @@ const SplashScreen = ({ onComplete }) => {
         style={{ marginBottom: '25vh' }}
       >
         <img
-          src="/src/assets/logo/Baluca-portpolio logo.png"
+          src={logoImg}
           alt="Baluca Portfolio Logo"
           className="relative z-10 w-40 sm:w-48 md:w-56 lg:w-64 object-contain drop-shadow-xl"
         />
