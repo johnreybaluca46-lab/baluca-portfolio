@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../stylesheet css/MyProjectPage.css';
 import bpLogo from '../../assets/logo/Baluca-portpolio logo.png';
 import rgbLogo from '../../assets/my project assets/Arduino_and_flutter_project_assets/Rgblightcontrol/rgb_light_control_logo.png';
@@ -268,13 +268,6 @@ const StatCard = ({ title, count }) => {
   );
 };
 
-const getProjectCount = (rootId) => {
-  const rootNode = projectData.find(n => n.id === rootId);
-  if (!rootNode) return 0;
-  return rootNode.children.reduce((acc, category) => {
-    return acc + category.children.filter(file => file.label !== 'EMPTY').length;
-  }, 0);
-};
 
 /* ─────────────────────────────────────────────
    Main Page Component

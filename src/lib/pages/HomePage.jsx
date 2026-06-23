@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../stylesheet css/HomePage.css';
 import profileImg from '../../assets/images/its me.png';
 
@@ -140,21 +140,21 @@ const HomePage = ({ show, setCurrentPage }) => {
         </div>
 
         {/* Content */}
-        <div className="mt-24 sm:mt-32 md:mt-16 max-w-2xl">
+        <div className="mt-4 sm:mt-8 md:mt-16 max-w-2xl">
           <div className="home-title-content">
             <h2>HOME</h2>
             <h2>HOME</h2>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h1 className="text-sm sm:text-3xl lg:text-5xl font-bold mb-1 sm:mb-4">
             <span className="text-[#1e90ff]">Hello, I'm</span> Johnrey V. Baluca
           </h1>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+          <h2 className="text-[11px] sm:text-2xl md:text-3xl font-bold mb-0.5 sm:mb-2">
             Web <span className="text-[#1e90ff]">Development</span>
           </h2>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6">
+          <h2 className="text-[11px] sm:text-2xl md:text-3xl font-bold mb-1.5 sm:mb-6">
             Application <span className="text-[#1e90ff]">Development</span>
           </h2>
-          <p ref={descRef} className="text-gray-400 text-sm sm:text-base leading-relaxed mb-8 max-w-xl text-justify font-medium">
+          <p ref={descRef} className="text-gray-400 text-[10px] sm:text-sm md:text-base leading-snug sm:leading-relaxed mb-3 sm:mb-8 max-w-xl text-justify font-medium">
             I am Johnrey Baluca, an Application Developer
             and Web Developer passionate about creating
             innovative, user-friendly, and efficient digital
@@ -165,7 +165,8 @@ const HomePage = ({ show, setCurrentPage }) => {
             embrace new technologies, and strive to deliver
             high-quality software.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: '1.2rem', marginTop: '1.5rem', justifyContent: 'start' }}>
+          {/* Hidden on mobile and tablet — accessible via hamburger menu */}
+          <div className="hidden lg:grid" style={{ gridTemplateColumns: 'repeat(3, auto)', gap: '1.2rem', marginTop: '1.5rem', justifyContent: 'start' }}>
             <FancyButton className="w-44 h-13 text-sm sm:text-base" onClick={() => setCurrentPage('about')}>About me</FancyButton>
             <FancyButton className="w-44 h-13 text-sm sm:text-base" onClick={() => setCurrentPage('skills')}>Skills</FancyButton>
             <FancyButton className="w-44 h-13 text-sm sm:text-base" onClick={() => setCurrentPage('projects')}>My projects</FancyButton>

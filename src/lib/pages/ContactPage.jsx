@@ -2,7 +2,7 @@ import { db } from '../../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import emailjs from '@emailjs/browser';
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../stylesheet css/ContactPage.css';
 import bpLogo from '../../assets/logo/Baluca-portpolio logo.png';
 
@@ -26,7 +26,6 @@ const ContactPage = ({ show, setCurrentPage }) => {
 
   const sectionRef = useRef(null);
   const messageRef = useRef(null);
-  const connectRef = useRef(null);
 
   useEffect(() => {
     const el = sectionRef.current;

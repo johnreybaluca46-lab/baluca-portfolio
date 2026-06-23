@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../stylesheet css/AboutMePage.css';
 import analyticGif from '../../assets/gif/analytic.gif';
 import profilePic from '../../assets/images/profile pic.png';
@@ -27,7 +27,6 @@ import design7 from '../../assets/images/design 7.jpg';
 import design8 from '../../assets/images/design 8.jpg';
 
 const AboutMePage = ({ show, setCurrentPage }) => {
-  const [navExpanded, setNavExpanded] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const sectionRef = useRef(null);
   const personalInfoRef = useRef(null);

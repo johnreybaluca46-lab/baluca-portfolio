@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../stylesheet css/SkillsPage.css';
 
 // Import Assets
@@ -23,7 +23,6 @@ import photoshopIcon from '../../assets/logo/photoshop.png';
 import figmaIcon from '../../assets/logo/figma.png';
 import drawioIcon from '../../assets/logo/draw io.webp';
 import fishGif from '../../assets/gif/fish.gif';
-import seeweedGif from '../../assets/gif/seeweed.gif';
 
 /* ── 3D Tool Card ── */
 const ThreeDCard = ({ title, icon, content, onSeeMore }) => {

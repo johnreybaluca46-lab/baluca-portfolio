@@ -174,13 +174,13 @@ const SplashScreen = ({ onComplete }) => {
         <img
           src={logoImg}
           alt="Baluca Portfolio Logo"
-          className="relative z-10 w-40 sm:w-48 md:w-56 lg:w-64 object-contain drop-shadow-xl"
+          className="relative z-10 w-24 sm:w-32 md:w-48 lg:w-64 object-contain drop-shadow-xl"
         />
 
         {/* Typography */}
-        <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide flex items-center justify-center whitespace-nowrap">
+        <h1 className="mt-3 text-xl sm:text-3xl md:text-5xl font-extrabold tracking-wide flex items-center justify-center">
           <span className="text-[#1e90ff]">BALUCA</span>
-          <span className="text-black ml-2 sm:ml-3">PORTFOLIO</span>
+          <span className="text-black ml-2">PORTFOLIO</span>
         </h1>
 
         {/* Decorative Line under text */}
@@ -192,7 +192,7 @@ const SplashScreen = ({ onComplete }) => {
         {/* ENTER Button */}
         <button
           onClick={() => setEntering(true)}
-          className={`enter-btn mt-8 w-80 sm:w-96 h-16 shadow-lg ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          className={`enter-btn mt-6 w-48 sm:w-72 md:w-80 h-12 sm:h-14 md:h-16 shadow-lg ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           style={{ transitionDelay: '400ms' }}
         >
@@ -248,7 +248,7 @@ const SplashScreen = ({ onComplete }) => {
         </svg>
 
         {/* Copyright Footer */}
-        <div className="absolute bottom-4 w-full text-center text-white/90 font-['Poppins'] font-semibold text-sm tracking-widest z-10">
+        <div className="absolute bottom-4 w-full text-center text-white/90 font-['Poppins'] font-semibold text-xs sm:text-sm tracking-wide sm:tracking-widest z-10 px-2">
           &copy; 2026 All Rights Reserved. Baluca Johnrey
         </div>
       </div>
