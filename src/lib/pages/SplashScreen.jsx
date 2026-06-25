@@ -41,120 +41,100 @@ const SplashScreen = ({ onComplete }) => {
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Circle 1 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/60 filter blur-2xl circle-float-a"
+          className="absolute rounded-full bg-[#1e90ff]/60 filter blur-xl md:blur-2xl circle-float-a w-[120px] h-[120px] md:w-[240px] md:h-[240px]"
           style={{
             top: '12%',
             left: '8%',
-            width: '240px',
-            height: '240px',
             '--dur': '12s',
             '--pulse': '4s',
           }}
         />
         {/* Circle 2 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/65 filter blur-xl circle-float-b"
+          className="absolute rounded-full bg-[#1e90ff]/65 filter blur-lg md:blur-xl circle-float-b w-[90px] h-[90px] md:w-[180px] md:h-[180px]"
           style={{
             top: '25%',
             right: '12%',
-            width: '180px',
-            height: '180px',
             '--dur': '16s',
             '--pulse': '5s',
           }}
         />
         {/* Circle 3 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/55 filter blur-3xl circle-float-c"
+          className="absolute rounded-full bg-[#1e90ff]/55 filter blur-2xl md:blur-3xl circle-float-c w-[160px] h-[160px] md:w-[320px] md:h-[320px]"
           style={{
             bottom: '38%',
             left: '22%',
-            width: '320px',
-            height: '320px',
             '--dur': '20s',
             '--pulse': '6s',
           }}
         />
         {/* Circle 4 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/60 filter blur-xl circle-float-a"
+          className="hidden md:block absolute rounded-full bg-[#1e90ff]/60 filter blur-lg md:blur-xl circle-float-a w-[75px] h-[75px] md:w-[150px] md:h-[150px]"
           style={{
             bottom: '45%',
             right: '18%',
-            width: '150px',
-            height: '150px',
             '--dur': '14s',
             '--pulse': '4.5s',
           }}
         />
         {/* Circle 5 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/55 filter blur-3xl circle-float-b"
+          className="hidden md:block absolute rounded-full bg-[#1e90ff]/55 filter blur-2xl md:blur-3xl circle-float-b w-[140px] h-[140px] md:w-[280px] md:h-[280px]"
           style={{
             top: '8%',
             left: '45%',
-            width: '280px',
-            height: '280px',
             '--dur': '18s',
             '--pulse': '5.5s',
           }}
         />
         {/* Circle 6 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/60 filter blur-2xl circle-float-c"
+          className="hidden md:block absolute rounded-full bg-[#1e90ff]/60 filter blur-xl md:blur-2xl circle-float-c w-[60px] h-[60px] md:w-[120px] md:h-[120px]"
           style={{
             top: '55%',
             left: '5%',
-            width: '120px',
-            height: '120px',
             '--dur': '10s',
             '--pulse': '3.5s',
           }}
         />
         {/* Circle 7 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/55 filter blur-2xl circle-float-a"
+          className="hidden md:block absolute rounded-full bg-[#1e90ff]/55 filter blur-xl md:blur-2xl circle-float-a w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
           style={{
             top: '40%',
             right: '35%',
-            width: '200px',
-            height: '200px',
             '--dur': '15s',
             '--pulse': '4.8s',
           }}
         />
         {/* Circle 8 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/50 filter blur-xl circle-float-b"
+          className="hidden md:block absolute rounded-full bg-[#1e90ff]/50 filter blur-lg md:blur-xl circle-float-b w-[80px] h-[80px] md:w-[160px] md:h-[160px]"
           style={{
             bottom: '20%',
             left: '45%',
-            width: '160px',
-            height: '160px',
             '--dur': '17s',
             '--pulse': '5.2s',
           }}
         />
         {/* Circle 9 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/50 filter blur-2xl circle-float-c"
+          className="hidden md:block absolute rounded-full bg-[#1e90ff]/50 filter blur-xl md:blur-2xl circle-float-c w-[70px] h-[70px] md:w-[140px] md:h-[140px]"
           style={{
             top: '45%',
             left: '30%',
-            width: '140px',
-            height: '140px',
             '--dur': '19s',
             '--pulse': '5.8s',
           }}
         />
         {/* Circle 10 */}
         <div
-          className="absolute rounded-full bg-[#1e90ff]/60 filter blur-3xl circle-float-a"
+          className="hidden md:block absolute rounded-full bg-[#1e90ff]/60 filter blur-2xl md:blur-3xl circle-float-a w-[110px] h-[110px] md:w-[220px] md:h-[220px]"
           style={{
             top: '60%',
             right: '8%',
-            width: '220px',
-            height: '220px',
             '--dur': '13s',
             '--pulse': '4.2s',
           }}

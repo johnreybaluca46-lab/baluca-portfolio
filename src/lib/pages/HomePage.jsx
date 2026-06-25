@@ -145,16 +145,16 @@ const HomePage = ({ show, setCurrentPage }) => {
             <h2>HOME</h2>
             <h2>HOME</h2>
           </div>
-          <h1 className="text-sm sm:text-3xl lg:text-5xl font-bold mb-1 sm:mb-4">
+          <h1 className="text-base sm:text-3xl lg:text-5xl font-bold mb-1 sm:mb-4">
             <span className="text-[#1e90ff]">Hello, I'm</span> Johnrey V. Baluca
           </h1>
-          <h2 className="text-[11px] sm:text-2xl md:text-3xl font-bold mb-0.5 sm:mb-2">
+          <h2 className="text-sm sm:text-2xl md:text-3xl font-bold mb-0.5 sm:mb-2">
             Web <span className="text-[#1e90ff]">Development</span>
           </h2>
-          <h2 className="text-[11px] sm:text-2xl md:text-3xl font-bold mb-1.5 sm:mb-6">
+          <h2 className="text-sm sm:text-2xl md:text-3xl font-bold mb-1.5 sm:mb-6">
             Application <span className="text-[#1e90ff]">Development</span>
           </h2>
-          <p ref={descRef} className="text-gray-400 text-[10px] sm:text-sm md:text-base leading-snug sm:leading-relaxed mb-3 sm:mb-8 max-w-xl text-justify font-medium">
+          <p ref={descRef} className="text-gray-400 text-xs sm:text-sm md:text-base leading-snug sm:leading-relaxed mb-3 sm:mb-8 max-w-xl text-justify font-medium">
             I am Johnrey Baluca, an Application Developer
             and Web Developer passionate about creating
             innovative, user-friendly, and efficient digital
