@@ -45,7 +45,7 @@ const PageTransition = ({ onComplete }) => {
         ].map((c, i) => (
           <div
             key={i}
-            className={`absolute rounded-full bg-[#1e90ff]/55 filter blur-2xl ${c.cls}`}
+            className={`absolute rounded-full bg-[#1e90ff]/55 filter blur-2xl ${c.cls} ${i >= 3 ? 'hidden md:block' : ''}`}
             style={{
               top: c.top,
               left: c.left,
