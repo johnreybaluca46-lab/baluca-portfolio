@@ -67,7 +67,7 @@ const PageTransition = ({ onComplete }) => {
       </div>
 
       {/* Progress Bar */}
-      <div style={{ marginTop: '3rem', width: '20rem' }}>
+      <div style={{ marginTop: '3rem', width: 'min(16rem, 80vw)' }}>
         <div style={{ width: '100%', height: '8px', backgroundColor: '#e5e7eb', borderRadius: '9999px', overflow: 'hidden' }}>
           <div
             style={{
@@ -79,7 +79,7 @@ const PageTransition = ({ onComplete }) => {
             }}
           />
         </div>
-        <p style={{ marginTop: '0.75rem', textAlign: 'center', color: '#1e90ff', fontWeight: 'bold', fontSize: '1.1rem', letterSpacing: '0.15em' }}>
+        <p style={{ marginTop: '0.75rem', textAlign: 'center', color: '#1e90ff', fontWeight: 'bold', fontSize: '0.95rem', letterSpacing: '0.15em' }}>
           {progress}%
         </p>
       </div>

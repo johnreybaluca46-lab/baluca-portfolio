@@ -250,14 +250,14 @@ const SplashScreen = ({ onComplete }) => {
         </div>
 
         {/* Progress Bar */}
-        <div className="mt-12 w-64 sm:w-80">
+        <div className="mt-12 w-48 sm:w-64 md:w-80">
           <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
             <div
               className="h-full bg-[#1e90ff] rounded-full transition-all duration-100 ease-linear"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="mt-3 text-center text-[#1e90ff] font-bold text-lg tracking-widest">
+          <p className="mt-3 text-center text-[#1e90ff] font-bold text-base sm:text-lg tracking-widest">
             {progress}%
           </p>
         </div>
