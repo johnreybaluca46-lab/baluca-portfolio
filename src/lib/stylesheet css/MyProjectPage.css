@@ -12,6 +12,13 @@
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
   scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+.myproject-section *,
+.myproject-section *::before,
+.myproject-section *::after {
+  box-sizing: border-box;
 }
 
 .myproject-section.show {
@@ -24,6 +31,87 @@
 ───────────────────────────────────────────── */
 /* fixed-nav-header, nav-brand, nav-logo-img, nav-name, nav-links-right,
    nav-link, nav-link.active  →  already defined in index.css / other CSS files */
+
+/* ── Mobile Hamburger Menu ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 18px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.nav-hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile & Tablet Nav Adjustments */
+@media (max-width: 1024px) {
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-hamburger.open span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+  .nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+
+  .nav-links-right {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+    gap: 0;
+    z-index: 1000;
+  }
+
+  .nav-links-right.expanded {
+    max-height: 400px;
+    padding: 1rem 0;
+  }
+
+  .nav-links-right .nav-link {
+    width: 90%;
+    text-align: center;
+    padding: 0.8rem 0;
+    margin: 0.2rem 0;
+    font-size: 1rem;
+    color: #111;
+    font-weight: 800;
+  }
+
+  .nav-links-right .nav-link::after {
+    display: none;
+  }
+
+  .nav-links-right .nav-link.active {
+    background-color: #82baff;
+    color: #fff;
+    border-radius: 8px;
+  }
+}
 
 /* ─────────────────────────────────────────────
    Page Header
@@ -764,17 +852,159 @@
    Responsive
 ───────────────────────────────────────────── */
 @media (max-width: 768px) {
+  .myproject-title-bg {
+    height: 2.8rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .myproject-title-bg h2 {
+    font-size: 1.7rem;
+  }
+
   .myproject-layout {
     grid-template-columns: 1fr;
     padding: 0 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   .myproject-sidebar {
     position: static;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .depth-0-item {
+    padding: 12px 12px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .proj-tree-label {
+    font-size: 13px;
+    padding: 6px 8px;
+    gap: 8px;
+  }
+
+  .proj-tree-label span, .proj-file-item span {
+    flex: 1;
+    min-width: 0;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.2;
   }
 
   .myproject-preview {
     min-height: 300px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .myproject-title-bg {
+    height: 2.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .myproject-title-bg h2 {
+    font-size: 1.35rem;
+  }
+
+  .myproject-layout {
+    padding: 0;
+  }
+
+  .myproject-sidebar {
+    width: 100%;
+  }
+
+  .proj-tree-root {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .depth-0-item {
+    padding: 10px 12px;
+    width: 95%;
+    max-width: 350px;
+    margin: 0 auto 1.2rem auto;
+  }
+
+  .proj-tree-label {
+    font-size: 11px;
+    gap: 4px;
+    padding: 4px 4px;
+  }
+
+  .proj-tree-label span, .proj-file-item span {
+    font-size: 10px;
+  }
+  
+  .proj-chevron {
+    width: 16px;
+  }
+
+  .myproject-preview {
+    width: 95%;
+    max-width: 350px;
+    margin: 0 auto 2rem auto;
+    min-height: 400px;
+  }
+
+  .animated-folder-container {
+    transform: scale(0.65);
+    height: 120px;
+    margin-bottom: 0.5rem;
+  }
+
+  .proj-empty-text {
+    font-size: 0.75rem;
+    padding: 0 10px;
+  }
+
+  .proj-detail-title {
+    font-size: 1rem;
+  }
+
+  .proj-detail-badge {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .proj-detail-desc {
+    font-size: 0.8rem;
+  }
+
+  .stats-container {
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .e-card {
+    width: 90%;
+    max-width: 300px;
+    height: 180px;
+    margin: 0 auto;
+  }
+
+  .e-card .infotop {
+    top: 1.5rem;
+  }
+
+  .e-card .stat-text {
+    font-size: 4rem;
+  }
+
+  .e-card .name {
+    font-size: 0.75rem;
+  }
+
+  .e-card .wave {
+    top: 40px;
   }
 }
 
@@ -880,5 +1110,50 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Scroll-Up Button (Mobile & Tablet only)
+───────────────────────────────────────────── */
+.scroll-up-btn {
+  display: none;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e90ff, #005ce6);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(30, 144, 255, 0.45);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.2s ease;
+  pointer-events: none;
+}
+
+.scroll-up-btn--visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-up-btn:hover {
+  box-shadow: 0 6px 22px rgba(30, 144, 255, 0.65);
+}
+
+.scroll-up-btn:active {
+  transform: scale(0.92);
+}
+
+@media (max-width: 1024px) {
+  .scroll-up-btn {
+    display: flex;
   }
 }

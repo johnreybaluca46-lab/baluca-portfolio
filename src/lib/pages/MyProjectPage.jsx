@@ -19,27 +19,27 @@ import gradeCalcScreenshot from '../../assets/my project assets/application_proj
 ───────────────────────────────────────────── */
 const TechCard = ({ name, icon, description }) => {
   return (
-    <div className="group h-[240px] w-[180px]" style={{ perspective: '1000px' }}>
+    <div className="group h-[160px] w-[130px] md:h-[240px] md:w-[180px]" style={{ perspective: '1000px' }}>
       <div className="relative w-full h-full transition-transform duration-700 group-hover:[transform:rotateY(180deg)] cursor-pointer" style={{ transformStyle: 'preserve-3d' }}>
         {/* Front */}
-        <div className="absolute inset-0 bg-white border-[3px] border-[#1e90ff] flex flex-col items-center justify-center p-4 shadow-md" style={{ backfaceVisibility: 'hidden' }}>
+        <div className="absolute inset-0 bg-white border-2 md:border-[3px] border-[#1e90ff] flex flex-col items-center justify-center p-2 md:p-4 shadow-md" style={{ backfaceVisibility: 'hidden' }}>
           {/* Top Left Bracket */}
-          <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-[#1e90ff] -mt-1 -ml-1"></div>
+          <div className="absolute top-0 left-0 w-3 h-3 md:w-4 md:h-4 border-t-2 border-l-2 md:border-t-4 md:border-l-4 border-[#1e90ff] -mt-0.5 -ml-0.5 md:-mt-1 md:-ml-1"></div>
           {/* Bottom Right Bracket */}
-          <div className="absolute bottom-0 right-0 w-4 h-4 border-b-4 border-r-4 border-[#1e90ff] -mb-1 -mr-1"></div>
+          <div className="absolute bottom-0 right-0 w-3 h-3 md:w-4 md:h-4 border-b-2 border-r-2 md:border-b-4 md:border-r-4 border-[#1e90ff] -mb-0.5 -mr-0.5 md:-mb-1 md:-mr-1"></div>
 
-          <img src={icon} alt={name} className="w-20 h-20 object-contain mb-4" />
-          <span className="text-[#1e90ff] font-bold text-lg">{name}</span>
+          <img src={icon} alt={name} className="w-12 h-12 md:w-20 md:h-20 object-contain mb-2 md:mb-4" />
+          <span className="text-[#1e90ff] font-bold text-xs md:text-lg text-center">{name}</span>
         </div>
         {/* Back */}
-        <div className="absolute inset-0 bg-white border-[3px] border-[#1e90ff] flex flex-col items-center justify-center p-4 shadow-[0_0_15px_rgba(30,144,255,0.5)]" style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
+        <div className="absolute inset-0 bg-white border-2 md:border-[3px] border-[#1e90ff] flex flex-col items-center justify-center p-2 md:p-4 shadow-[0_0_15px_rgba(30,144,255,0.5)]" style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
           {/* Top Left Bracket */}
-          <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-[#1e90ff] -mt-1 -ml-1"></div>
+          <div className="absolute top-0 left-0 w-3 h-3 md:w-4 md:h-4 border-t-2 border-l-2 md:border-t-4 md:border-l-4 border-[#1e90ff] -mt-0.5 -ml-0.5 md:-mt-1 md:-ml-1"></div>
           {/* Bottom Right Bracket */}
-          <div className="absolute bottom-0 right-0 w-4 h-4 border-b-4 border-r-4 border-[#1e90ff] -mb-1 -mr-1"></div>
+          <div className="absolute bottom-0 right-0 w-3 h-3 md:w-4 md:h-4 border-b-2 border-r-2 md:border-b-4 md:border-r-4 border-[#1e90ff] -mb-0.5 -mr-0.5 md:-mb-1 md:-mr-1"></div>
 
-          <span className="text-[#1e90ff] font-bold text-lg mb-2">{name}</span>
-          <p className="text-black font-medium text-xs text-center leading-relaxed">{description}</p>
+          <span className="text-[#1e90ff] font-bold text-xs md:text-lg mb-1 md:mb-2 text-center">{name}</span>
+          <p className="text-black font-medium text-[9px] md:text-xs text-center leading-tight md:leading-relaxed">{description}</p>
         </div>
       </div>
     </div>
@@ -278,6 +278,44 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
   const sectionRef = useRef(null);
   const rgbTitleRef = useRef(null);
   const gradeCalcTitleRef = useRef(null);
+  const previewRef = useRef(null);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showScrollUp, setShowScrollUp] = useState(false);
+
+  // Show/hide scroll-up button based on scroll position (mobile/tablet only)
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const handleScroll = () => {
+      if (window.innerWidth < 1024) {
+        setShowScrollUp(section.scrollTop > 200);
+      }
+    };
+    section.addEventListener('scroll', handleScroll);
+    return () => section.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    sectionRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Auto-scroll to preview panel on mobile/tablet when a file is selected
+  useEffect(() => {
+    // Strictly limit auto-scroll to mobile (480px) and tablet (768px) views.
+    // Desktop screens will completely ignore this.
+    const isMobileOrTablet = window.matchMedia("(max-width: 768px)").matches;
+    
+    if (selectedFile && isMobileOrTablet) {
+      setTimeout(() => {
+        const section = sectionRef.current;
+        const preview = previewRef.current;
+        if (section && preview) {
+          section.scrollTo({ top: preview.offsetTop - 80, behavior: 'smooth' });
+        }
+      }, 200);
+    }
+  }, [selectedFile]);
 
   useEffect(() => {
     let cleanups = [];
@@ -319,6 +357,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
   }, [selectedFile]);
 
   return (
+    <>
     <div className={`myproject-section ${show ? 'show' : ''}`} id="projects" ref={sectionRef}>
 
       {/* ── Navigation ── */}
@@ -327,13 +366,21 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
           <img src={bpLogo} alt="Baluca Portfolio" className="nav-logo-img" />
           <span className="nav-name">Johnrey Viadnes Baluca</span>
         </div>
-        <div className="nav-links-right">
-          <a href="#home" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('home'); }}>Home</a>
-          <a href="#about" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('about'); }}>About me</a>
-          <a href="#skills" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('skills'); }}>Skills</a>
-          <a href="#projects" className="nav-link active" onClick={e => { e.preventDefault(); setCurrentPage('projects'); }}>My project</a>
-          <a href="#service" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('service'); }}>Service</a>
-          <a href="#contact" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('contact'); }}>Contact</a>
+        
+        {/* Hamburger Icon */}
+        <div className={`nav-hamburger ${isMenuOpen ? 'open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div className={`nav-links-right ${isMenuOpen ? 'expanded' : ''}`}>
+          <a href="#home" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('home'); setIsMenuOpen(false); }}>Home</a>
+          <a href="#about" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('about'); setIsMenuOpen(false); }}>About me</a>
+          <a href="#skills" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('skills'); setIsMenuOpen(false); }}>Skills</a>
+          <a href="#projects" className="nav-link active" onClick={e => { e.preventDefault(); setCurrentPage('projects'); setIsMenuOpen(false); }}>My project</a>
+          <a href="#service" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('service'); setIsMenuOpen(false); }}>Service</a>
+          <a href="#contact" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('contact'); setIsMenuOpen(false); }}>Contact</a>
         </div>
       </nav>
 
@@ -365,56 +412,56 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
 
         {/* RIGHT: Preview Panel and Stats */}
         <div className="flex flex-col gap-6 w-full">
-          <section className="myproject-preview has-cyber-pattern">
+          <section className="myproject-preview has-cyber-pattern" ref={previewRef}>
             {selectedFile ? (
             selectedFile.id === 'Rgblightcontrol' ? (
               <div className="w-full max-w-4xl mx-auto custom-scrollbar" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
-                <div className="text-center mb-12 mt-4 h-[40px] flex justify-center items-center">
-                  <h1 ref={rgbTitleRef} className="text-[#1e90ff] text-2xl md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
+                <div className="text-center mb-8 md:mb-12 mt-4 h-[40px] flex justify-center items-center">
+                  <h1 ref={rgbTitleRef} className="text-[#1e90ff] text-lg md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
                     RGB LIGHT CONTROL
                   </h1>
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-8 mb-8">
                   <div className="flex-1">
-                    <h2 className="text-[#1e90ff] text-xl font-bold mb-4 uppercase tracking-wide">ABOUT THIS PROJECT</h2>
-                    <p className="text-black font-medium text-sm md:text-base leading-relaxed text-justify mb-4">
+                    <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">ABOUT THIS PROJECT</h2>
+                    <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify mb-4">
                       The RGB Light Control project is an innovative integration of mobile software and open-source hardware. Built using Flutter for the front-end application and Arduino for the microcontroller logic, this project allows users to wirelessly manage RGB LED setups.
                     </p>
-                    <p className="text-black font-medium text-sm md:text-base leading-relaxed text-justify">
+                    <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify">
                       By utilizing Wi-Fi communication, the mobile app sends real-time commands to the Arduino, which processes the signals and adjusts the lighting accordingly. This project showcases the power of IoT (Internet of Things) concepts applied to home automation, personal projects, and creative lighting setups, providing a highly responsive and interactive user experience.
                     </p>
                   </div>
                   <div className="w-full md:w-1/3 flex justify-center items-start">
-                    <div className="bg-[#050505] p-6 rounded-2xl shadow-xl transition-transform duration-300 hover:scale-105 flex justify-center items-center w-full border border-gray-800">
-                      <img src={rgbLogo} alt="RGB Light Control Logo" className="w-full max-w-[200px] object-contain" />
+                    <div className="bg-[#050505] p-4 md:p-6 rounded-2xl shadow-xl transition-transform duration-300 hover:scale-105 flex justify-center items-center w-full border border-gray-800">
+                      <img src={rgbLogo} alt="RGB Light Control Logo" className="w-28 md:w-full max-w-[200px] object-contain" />
                     </div>
                   </div>
                 </div>
 
-                <div className="mb-10">
-                  <h2 className="text-[#1e90ff] text-xl font-bold mb-4 uppercase tracking-wide">DESCRIPTION</h2>
-                  <p className="text-black font-medium text-sm md:text-base leading-relaxed text-justify">
+                <div className="mb-8 md:mb-10">
+                  <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">DESCRIPTION</h2>
+                  <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify">
                     The RGB Light Control application provides a seamless and intuitive user interface to customize your lighting environment. Key features include a full color-picker for precise hue selection, brightness control sliders, and various dynamic lighting modes to suit any mood. Designed with a modern, dark-themed UI, the app ensures that connecting to your Arduino device is straightforward and reliable. Whether you are setting the mood for a movie night, building a custom gaming room setup, or just exploring hardware integrations, this application gives you complete and wireless control over your space's ambiance.
                   </p>
                 </div>
 
-                <div className="mb-10">
-                  <h2 className="text-[#1e90ff] text-xl font-bold mb-6 uppercase tracking-wide">SCREENSHOT APPLICATION</h2>
+                <div className="mb-8 md:mb-10">
+                  <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-6 uppercase tracking-wide">SCREENSHOT APPLICATION</h2>
                   <div className="flex justify-center">
                     <img src={screenShot} alt="Screenshot Application" className="w-full max-w-4xl rounded-lg" />
                   </div>
                 </div>
 
-                <div className="mb-10">
-                  <h2 className="text-[#1e90ff] text-xl font-bold mb-6 uppercase tracking-wide">COMPONENTS DIAGRAM</h2>
-                  <div className="flex flex-col md:flex-row gap-8 items-start">
+                <div className="mb-8 md:mb-10">
+                  <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-6 uppercase tracking-wide">COMPONENTS DIAGRAM</h2>
+                  <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start">
                     <div className="w-full md:w-1/2">
                       <img src={rgbControlDiagram} alt="Components Diagram" className="w-full bg-gray-100 p-2 rounded-lg" />
                     </div>
                     <div className="w-full md:w-1/2">
-                      <h3 className="text-gray-600 font-bold mb-4 text-sm md:text-base uppercase tracking-wider">Total Components</h3>
-                      <ul className="text-gray-500 space-y-2 list-disc pl-5 font-bold text-sm md:text-base">
+                      <h3 className="text-gray-600 font-bold mb-2 md:mb-4 text-xs md:text-base uppercase tracking-wider">Total Components</h3>
+                      <ul className="text-gray-500 space-y-1 md:space-y-2 list-disc pl-5 font-bold text-xs md:text-base">
                         <li>1 × ESP32 Development Board</li>
                         <li>1 × RGB LED</li>
                         <li>1 × Red LED</li>
@@ -429,9 +476,9 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                   </div>
                 </div>
 
-                <div className="mb-10">
-                  <h2 className="text-[#1e90ff] text-xl font-bold mb-6 uppercase tracking-wide">TECHNOLOGIES USED</h2>
-                  <div className="flex flex-wrap gap-6 justify-center">
+                <div className="mb-8 md:mb-10">
+                  <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-6 uppercase tracking-wide">TECHNOLOGIES USED</h2>
+                  <div className="flex flex-wrap gap-4 md:gap-6 justify-center">
                     <TechCard name="Flutter" icon={flutterIcon} description="Used to build the cross-platform mobile application for Android." />
                     <TechCard name="Dart" icon={dartIcon} description="The primary programming language for the Flutter framework." />
                     <TechCard name="Firebase" icon={firebaseIcon} description="Used for real-time data sync and authentication." />
@@ -443,47 +490,47 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
               </div>
             ) : selectedFile.id === 'Gradecalculator' ? (
               <div className="w-full max-w-4xl mx-auto custom-scrollbar" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
-                <div className="text-center mb-12 mt-4 h-[40px] flex justify-center items-center">
-                  <h1 ref={gradeCalcTitleRef} className="text-[#1e90ff] text-2xl md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
+                <div className="text-center mb-8 md:mb-12 mt-4 h-[40px] flex justify-center items-center">
+                  <h1 ref={gradeCalcTitleRef} className="text-[#1e90ff] text-lg md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
                     GRADE CALCULATOR
                   </h1>
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-8 mb-8">
                   <div className="flex-1">
-                    <h2 className="text-[#1e90ff] text-xl font-bold mb-4 uppercase tracking-wide">ABOUT THIS PROJECT</h2>
-                    <p className="text-black font-medium text-sm md:text-base leading-relaxed text-justify mb-4">
+                    <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">ABOUT THIS PROJECT</h2>
+                    <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify mb-4">
                       The Grade Calculator is a comprehensive academic tool designed to help students track and manage their course performance efficiently. Built with Flutter, it provides a seamless cross-platform experience, allowing users to calculate both their General Weighted Average (GWA) and Grade Point Average (GPA), monitor individual subject grades, and project required scores for future assignments.
                     </p>
-                    <p className="text-black font-medium text-sm md:text-base leading-relaxed text-justify">
+                    <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify">
                       This application simplifies academic monitoring by providing a clear and visual representation of a student's academic progress. Instead of relying on manual calculations or complex spreadsheets, students can instantly see how different grades impact their overall GWA and GPA, helping them stay informed and focused on their academic goals.
                     </p>
                   </div>
                   <div className="w-full md:w-1/3 flex justify-center items-start">
-                    <div className="bg-[#050505] p-6 rounded-2xl shadow-xl transition-transform duration-300 hover:scale-105 flex justify-center items-center w-full border border-gray-800">
-                      <img src={gradeCalcLogo} alt="Grade Calculator Logo" className="w-full max-w-[500px] object-contain" />
+                    <div className="bg-[#050505] p-4 md:p-6 rounded-2xl shadow-xl transition-transform duration-300 hover:scale-105 flex justify-center items-center w-full border border-gray-800">
+                      <img src={gradeCalcLogo} alt="Grade Calculator Logo" className="w-28 md:w-full max-w-[500px] object-contain" />
                     </div>
                   </div>
                 </div>
 
-                <div className="mb-10">
-                  <h2 className="text-[#1e90ff] text-xl font-bold mb-4 uppercase tracking-wide">DESCRIPTION</h2>
-                  <p className="text-black font-medium text-sm md:text-base leading-relaxed text-justify">
+                <div className="mb-8 md:mb-10">
+                  <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">DESCRIPTION</h2>
+                  <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify">
                     The application features a clean and intuitive interface where users can easily input their grades, units, and corresponding weights. Key functionalities include an automated GWA Calculator, GPA Calculator, structured grade tracking, academic performance analytics, and target-setting tools that help students determine the scores needed to achieve their desired results.
                     With real-time updates and secure cloud synchronization, the Grade Calculator ensures students always have an up-to-date and reliable overview of their academic standing, empowering them to make informed decisions to achieve their goals.
                   </p>
                 </div>
 
-                <div className="mb-10">
-                  <h2 className="text-[#1e90ff] text-xl font-bold mb-6 uppercase tracking-wide">SCREENSHOT APPLICATION</h2>
+                <div className="mb-8 md:mb-10">
+                  <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-6 uppercase tracking-wide">SCREENSHOT APPLICATION</h2>
                   <div className="flex justify-center">
                     <img src={gradeCalcScreenshot} alt="Screenshot Application" className="w-full max-w-4xl rounded-lg" />
                   </div>
                 </div>
 
-                <div className="mb-10">
-                  <h2 className="text-[#1e90ff] text-xl font-bold mb-6 uppercase tracking-wide">TECHNOLOGIES USED</h2>
-                  <div className="flex flex-wrap gap-6 justify-center">
+                <div className="mb-8 md:mb-10">
+                  <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-6 uppercase tracking-wide">TECHNOLOGIES USED</h2>
+                  <div className="flex flex-wrap gap-4 md:gap-6 justify-center">
                     <TechCard name="Flutter" icon={flutterIcon} description="Used to build the cross-platform mobile application." />
                     <TechCard name="Dart" icon={dartIcon} description="The primary programming language for the Flutter framework." />
                     <TechCard name="Firebase" icon={firebaseIcon} description="Used for real-time database and authentication." />
@@ -554,6 +601,18 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
         </div>
       </div>
     </div>
+
+    {/* Scroll-up button — sibling to myproject-section, outside transform context */}
+    <button
+      className={`scroll-up-btn ${showScrollUp ? 'scroll-up-btn--visible' : ''}`}
+      onClick={scrollToTop}
+      aria-label="Scroll to top"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+    </>
   );
 };
 
