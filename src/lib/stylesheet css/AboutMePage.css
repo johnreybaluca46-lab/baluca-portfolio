@@ -316,6 +316,7 @@
   .folder-heading {
     font-size: 1.6rem;
   }
+
 }
 
 @media (max-width: 768px) {
@@ -368,8 +369,8 @@
   }
 
   .about-description {
-    font-size: 0.92rem;
-    line-height: 1.6;
+    font-size: 0.72rem !important;
+    line-height: 1.4;
     text-align: justify;
     font-weight: 600;
     margin: 0;
@@ -393,7 +394,7 @@
   }
 
   .edu-folder-book {
-    min-height: 430px;
+    min-height: 360px;
   }
 
   .folder-tab {
@@ -555,9 +556,11 @@
   }
 
   .about-description {
-    font-size: 0.82rem;
-    line-height: 1.5;
+    font-size: 0.68rem !important;
+    line-height: 1.35;
     text-align: justify;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .folder-wrapper {

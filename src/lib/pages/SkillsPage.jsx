@@ -81,6 +81,7 @@ const SkillCard = ({ name, icon, percentage, description }) => {
 const SkillsPage = ({ show, setCurrentPage }) => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [modal, setModal] = useState(null); // null | 'photoshop' | 'figma'
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const sectionRef = useRef(null);
   const title1Ref = useRef(null);
   const title2Ref = useRef(null);
@@ -178,13 +179,18 @@ const SkillsPage = ({ show, setCurrentPage }) => {
           <img src={bpLogo} alt="Baluca Portfolio" className="nav-logo-img" />
           <span className="nav-name">Johnrey Viadnes Baluca</span>
         </div>
-        <div className="nav-links-right">
-          <a href="#home" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>Home</a>
-          <a href="#about" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }}>About me</a>
-          <a href="#skills" className="nav-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); }}>Skills</a>
-          <a href="#projects" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); }}>My project</a>
-          <a href="#service" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); }}>Service</a>
-          <a href="#contact" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}>Contact</a>
+        <div className={`nav-hamburger ${isMenuOpen ? 'open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div className={`nav-links-right ${isMenuOpen ? 'expanded' : ''}`}>
+          <a href="#home" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setIsMenuOpen(false); }}>Home</a>
+          <a href="#about" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); setIsMenuOpen(false); }}>About me</a>
+          <a href="#skills" className="nav-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); setIsMenuOpen(false); }}>Skills</a>
+          <a href="#projects" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); setIsMenuOpen(false); }}>My project</a>
+          <a href="#service" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); setIsMenuOpen(false); }}>Service</a>
+          <a href="#contact" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); setIsMenuOpen(false); }}>Contact</a>
         </div>
       </nav>
 
@@ -318,8 +324,7 @@ const SkillsPage = ({ show, setCurrentPage }) => {
           <img src={fishGif} className="skills-swimming-fish skills-fish-small skills-fish-3" alt="Fish" />
           <img src={fishGif} className="skills-swimming-fish skills-fish-small skills-fish-4" alt="Fish" />
           {/* FOOTER */}
-          <br></br>
-          <div className="skills-copyright-footer" style={{ padding: '0 2rem 2rem 2rem', backgroundColor: '#1e90ff', color: '#fff', textAlign: 'center' }}>
+          <div className="skills-copyright-footer" style={{ backgroundColor: '#1e90ff', color: '#fff', textAlign: 'center' }}>
             © {new Date().getFullYear()} Johnrey Viadnes Baluca. All Rights Reserved.
           </div>
         </div>
