@@ -18,6 +18,7 @@ import tiktokIcon from '../../assets/icon/tik-tok.png';
 
 const ContactPage = ({ show, setCurrentPage }) => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -256,13 +257,21 @@ const ContactPage = ({ show, setCurrentPage }) => {
           <img src={bpLogo} alt="Baluca Portfolio" className="nav-logo-img" />
           <span className="nav-name">Johnrey Viadnes Baluca</span>
         </div>
-        <div className="nav-links-right">
-          <a href="#home" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>Home</a>
-          <a href="#about" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }}>About me</a>
-          <a href="#skills" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); }}>Skills</a>
-          <a href="#projects" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); }}>My project</a>
-          <a href="#service" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); }}>Service</a>
-          <a href="#contact" className="nav-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}>Contact</a>
+
+        {/* Hamburger Icon */}
+        <div className={`nav-hamburger ${isMenuOpen ? 'open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div className={`nav-links-right ${isMenuOpen ? 'expanded' : ''}`}>
+          <a href="#home" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setIsMenuOpen(false); }}>Home</a>
+          <a href="#about" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); setIsMenuOpen(false); }}>About me</a>
+          <a href="#skills" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); setIsMenuOpen(false); }}>Skills</a>
+          <a href="#projects" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); setIsMenuOpen(false); }}>My project</a>
+          <a href="#service" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); setIsMenuOpen(false); }}>Service</a>
+          <a href="#contact" className="nav-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); setIsMenuOpen(false); }}>Contact</a>
         </div>
       </nav>
 
