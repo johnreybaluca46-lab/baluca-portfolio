@@ -16,7 +16,7 @@ import facebookIcon from '../../assets/icon/facebook.png';
 import gmailIcon from '../../assets/icon/gmail.png';
 import tiktokIcon from '../../assets/icon/tik-tok.png';
 
-import fishGif from '../../assets/gif/fish.gif';
+
 import design1 from '../../assets/images/design 1.jpg';
 import design2 from '../../assets/images/design 2.jpg';
 import design3 from '../../assets/images/design 3.jpg';
@@ -272,15 +272,7 @@ const AboutMePage = ({ show, setCurrentPage }) => {
           </svg>
         </div>
         <div className="dodgerblue-bg">
-          {/* Swimming Fishes - Big (Foreground) */}
-          <img src={fishGif} className="swimming-fish fish-big fish-1" alt="Fish" />
-          <img src={fishGif} className="swimming-fish fish-big fish-2" alt="Fish" />
-          <img src={fishGif} className="swimming-fish fish-big fish-3" alt="Fish" />
 
-          {/* Swimming Fishes - Small (Background) */}
-          <img src={fishGif} className="swimming-fish fish-small fish-4" alt="Fish" />
-          <img src={fishGif} className="swimming-fish fish-small fish-5" alt="Fish" />
-          <img src={fishGif} className="swimming-fish fish-small fish-6" alt="Fish" />
 
           <div className="albums-section">
             <h2 className="albums-title">Albums</h2>

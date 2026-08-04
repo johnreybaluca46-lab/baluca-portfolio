@@ -645,3 +645,10 @@
   position: relative;
   z-index: 5;
 }
+
+@media (max-width: 768px) {
+  .service-copyright-footer {
+    font-size: 0.75rem;
+    padding: 1.5rem 1rem 2rem;
+  }
+}

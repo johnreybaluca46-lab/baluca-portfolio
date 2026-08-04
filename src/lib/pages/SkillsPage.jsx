@@ -22,7 +22,7 @@ import vscodeIcon from '../../assets/logo/vs code ide.png';
 import photoshopIcon from '../../assets/logo/photoshop.png';
 import figmaIcon from '../../assets/logo/figma.png';
 import drawioIcon from '../../assets/logo/draw io.webp';
-import fishGif from '../../assets/gif/fish.gif';
+
 
 /* ── 3D Tool Card ── */
 const ThreeDCard = ({ title, icon, content, onSeeMore }) => {
@@ -318,11 +318,7 @@ const SkillsPage = ({ show, setCurrentPage }) => {
             </div>
           </div>
 
-          {/* Fishes */}
-          <img src={fishGif} className="skills-swimming-fish skills-fish-big skills-fish-1" alt="Fish" />
-          <img src={fishGif} className="skills-swimming-fish skills-fish-big skills-fish-2" alt="Fish" />
-          <img src={fishGif} className="skills-swimming-fish skills-fish-small skills-fish-3" alt="Fish" />
-          <img src={fishGif} className="skills-swimming-fish skills-fish-small skills-fish-4" alt="Fish" />
+
           {/* FOOTER */}
           <div className="skills-copyright-footer" style={{ backgroundColor: '#1e90ff', color: '#fff', textAlign: 'center' }}>
             © {new Date().getFullYear()} Johnrey Viadnes Baluca. All Rights Reserved.

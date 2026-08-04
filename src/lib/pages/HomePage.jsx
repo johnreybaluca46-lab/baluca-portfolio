@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import '../stylesheet css/HomePage.css';
 import profileImg from '../../assets/images/its me.png';
+import bpLogo from '../../assets/logo/Baluca-portpolio logo.png';
 
 const MatrixPattern = () => {
   const columns = Array.from({ length: 40 });
@@ -105,37 +106,74 @@ const HomePage = ({ show, setCurrentPage }) => {
     <div className={`homepage-container ${show ? 'show' : ''}`}>
       {/* Left Section - Black Background */}
       <div className="left-section">
-        {/* Navigation */}
-        <div className="nav-container">
-          <div className={`nav-pill ${navExpanded ? 'expanded' : ''}`}>
+        {/* Mobile Top Navigation */}
+        <div className="top-nav-bar">
+          <div className="top-nav-content">
+            <div className="top-nav-logo">
+              <img src={bpLogo} alt="BP Logo" className="nav-logo-img" />
+              <span className="nav-logo-text">JOHNREY VIADNES BALUCA</span>
+            </div>
             <button
-              className="nav-icon"
+              className="top-nav-toggle"
               onClick={() => setNavExpanded(!navExpanded)}
               aria-label="Toggle Navigation"
             >
               {navExpanded ? (
-                // Close (X) Icon
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
               ) : (
-                // Menu (Hamburger) Icon
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="3" y1="12" x2="21" y2="12"></line>
                   <line x1="3" y1="6" x2="21" y2="6"></line>
                   <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
               )}
             </button>
-            <div className="nav-links">
-              <a href="#home" className="nav-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>Home</a>
-              <a href="#about" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }}>About me</a>
-              <a href="#skills" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); }}>Skills</a>
-              <a href="#projects" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); }}>My project</a>
-              <a href="#service" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); }}>Service</a>
-              <a href="#contact" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}>Contact</a>
-            </div>
+          </div>
+          <div className={`top-nav-dropdown ${navExpanded ? 'show' : ''}`}>
+            <a href="#home" className="nav-dropdown-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setNavExpanded(false); }}>Home</a>
+            <a href="#about" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); setNavExpanded(false); }}>About me</a>
+            <a href="#skills" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); setNavExpanded(false); }}>Skills</a>
+            <a href="#projects" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); setNavExpanded(false); }}>My project</a>
+            <a href="#service" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); setNavExpanded(false); }}>Service</a>
+            <a href="#contact" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); setNavExpanded(false); }}>Contact</a>
+          </div>
+        </div>
+
+        {/* Desktop Blue Pill Navigation */}
+        <div className="desktop-nav-container">
+          <div className={`desktop-nav-pill ${navExpanded ? 'expanded' : ''}`}>
+            {navExpanded && (
+              <div className="desktop-nav-links">
+                <a href="#home" className="desktop-nav-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>Home</a>
+                <a href="#about" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }}>About me</a>
+                <a href="#skills" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); }}>Skills</a>
+                <a href="#projects" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); }}>My project</a>
+                <a href="#service" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); }}>Service</a>
+                <a href="#contact" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}>Contact</a>
+              </div>
+            )}
+            <button
+              className="desktop-nav-icon"
+              onClick={() => setNavExpanded(!navExpanded)}
+              aria-label="Toggle Navigation"
+            >
+              {navExpanded ? (
+                // Left Arrow
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+              ) : (
+                // Right Arrow
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              )}
+            </button>
           </div>
         </div>
 
