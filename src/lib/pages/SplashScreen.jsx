@@ -149,7 +149,7 @@ const SplashScreen = ({ onComplete }) => {
               ? 'translate-y-0 opacity-100 scale-100'
               : 'translate-y-10 opacity-0 scale-95'
           } px-4`}
-        style={{ marginBottom: '25vh' }}
+        style={{ marginBottom: '35vh' }}
       >
         <img
           src={logoImg}
@@ -211,25 +211,36 @@ const SplashScreen = ({ onComplete }) => {
 
       {/* Decorative Bottom Wave - slides down on enter */}
       <div
-        className={`absolute bottom-0 left-0 w-full overflow-hidden transition-all duration-700 ease-in ${entering ? 'translate-y-full opacity-0' : mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+        className={`absolute bottom-0 left-0 w-full flex flex-col transition-all duration-700 ease-in ${entering ? 'translate-y-full opacity-0' : mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
           }`}
-        style={{ height: '35vh', minHeight: '180px', marginBottom: '-7px' }}
+        style={{ height: '35vh', minHeight: '220px', marginBottom: '-7px' }}
       >
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
-          <defs>
-            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-          </defs>
-          <g className="parallax">
-            <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(30,144,255,0.7)" />
-            <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(30,144,255,0.5)" />
-            <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(30,144,255,0.3)" />
-            <use xlinkHref="#gentle-wave" x="48" y="7" fill="dodgerblue" />
-          </g>
-        </svg>
-
-        {/* Copyright Footer */}
-        <div className="absolute bottom-4 w-full text-center text-white/90 font-['Poppins'] font-semibold text-xs sm:text-sm tracking-wide sm:tracking-widest z-10 px-2">
-          &copy; 2026 All Rights Reserved. Baluca Johnrey
+        <div className="relative w-full h-[120px] md:h-[150px] flex-shrink-0 overflow-hidden">
+          <svg 
+            className="absolute top-0 w-full h-full" 
+            style={{ minWidth: '1024px', left: '50%', transform: 'translateX(-50%)' }}
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlnsXlink="http://www.w3.org/1999/xlink" 
+            viewBox="0 24 150 28" 
+            preserveAspectRatio="none" 
+            shapeRendering="auto"
+          >
+            <defs>
+              <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g className="parallax">
+              <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(30,144,255,0.7)" />
+              <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(30,144,255,0.5)" />
+              <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(30,144,255,0.3)" />
+              <use xlinkHref="#gentle-wave" x="48" y="7" fill="dodgerblue" />
+            </g>
+          </svg>
+        </div>
+        <div className="flex-grow w-full bg-[dodgerblue] relative z-10">
+          {/* Copyright Footer */}
+          <div className="absolute bottom-4 w-full text-center text-white/90 font-['Poppins'] font-semibold text-xs sm:text-sm tracking-wide sm:tracking-widest px-2">
+            &copy; 2026 All Rights Reserved. Baluca Johnrey
+          </div>
         </div>
       </div>
 

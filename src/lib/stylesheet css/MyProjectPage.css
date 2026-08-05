@@ -717,6 +717,9 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+  min-width: 1024px;
+  left: 50%;
+  transform: translateX(-50%);
   height: 120px;
 }
 

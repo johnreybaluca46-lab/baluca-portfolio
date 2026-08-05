@@ -716,14 +716,20 @@
   font-size: 0;
   margin-bottom: -10px;
   /* Below cards, above lines */
-}
-
-.water-waves-container .waves {
-  width: 100%;
+  overflow: hidden;
   height: 15vh;
   min-height: 100px;
   max-height: 150px;
-  display: block;
+}
+
+.water-waves-container .waves {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-width: 1024px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
 }
 
 .skills-underwater-bg {

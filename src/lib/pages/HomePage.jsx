@@ -104,44 +104,35 @@ const HomePage = ({ show, setCurrentPage }) => {
 
   return (
     <div className={`homepage-container ${show ? 'show' : ''}`}>
-      {/* Left Section - Black Background */}
-      <div className="left-section">
-        {/* Mobile Top Navigation */}
-        <div className="top-nav-bar">
-          <div className="top-nav-content">
-            <div className="top-nav-logo">
-              <img src={bpLogo} alt="BP Logo" className="nav-logo-img" />
-              <span className="nav-logo-text">JOHNREY VIADNES BALUCA</span>
-            </div>
-            <button
-              className="top-nav-toggle"
-              onClick={() => setNavExpanded(!navExpanded)}
-              aria-label="Toggle Navigation"
-            >
-              {navExpanded ? (
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              ) : (
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="3" y1="12" x2="21" y2="12"></line>
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-              )}
-            </button>
-          </div>
-          <div className={`top-nav-dropdown ${navExpanded ? 'show' : ''}`}>
-            <a href="#home" className="nav-dropdown-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setNavExpanded(false); }}>Home</a>
-            <a href="#about" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); setNavExpanded(false); }}>About me</a>
-            <a href="#skills" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); setNavExpanded(false); }}>Skills</a>
-            <a href="#projects" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); setNavExpanded(false); }}>My project</a>
-            <a href="#service" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); setNavExpanded(false); }}>Service</a>
-            <a href="#contact" className="nav-dropdown-link" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); setNavExpanded(false); }}>Contact</a>
-          </div>
+      {/* Navigation (Mobile & Tablet) */}
+      <nav className="fixed-nav-header">
+        <div className="nav-brand">
+          <img src={bpLogo} alt="Baluca Portfolio" className="nav-logo-img" />
+          <span className="nav-name">Johnrey Viadnes Baluca</span>
         </div>
 
+        {/* Hamburger Menu Icon */}
+        <div 
+          className={`nav-hamburger ${navExpanded ? 'open' : ''}`} 
+          onClick={() => setNavExpanded(!navExpanded)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div className={`nav-links-right ${navExpanded ? 'expanded' : ''}`}>
+          <a href="#home" className="nav-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setNavExpanded(false); }}>Home</a>
+          <a href="#about" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); setNavExpanded(false); }}>About me</a>
+          <a href="#skills" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); setNavExpanded(false); }}>Skills</a>
+          <a href="#projects" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); setNavExpanded(false); }}>My Projects</a>
+          <a href="#service" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); setNavExpanded(false); }}>Service</a>
+          <a href="#contact" className="nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); setNavExpanded(false); }}>Contact</a>
+        </div>
+      </nav>
+
+      {/* Left Section - Black Background */}
+      <div className="left-section">
         {/* Desktop Blue Pill Navigation */}
         <div className="desktop-nav-container">
           <div className={`desktop-nav-pill ${navExpanded ? 'expanded' : ''}`}>
@@ -150,7 +141,7 @@ const HomePage = ({ show, setCurrentPage }) => {
                 <a href="#home" className="desktop-nav-link active" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>Home</a>
                 <a href="#about" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }}>About me</a>
                 <a href="#skills" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('skills'); }}>Skills</a>
-                <a href="#projects" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); }}>My project</a>
+                <a href="#projects" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('projects'); }}>My Projects</a>
                 <a href="#service" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('service'); }}>Service</a>
                 <a href="#contact" className="desktop-nav-link" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}>Contact</a>
               </div>

@@ -391,7 +391,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
             <a href="#home" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('home'); setIsMenuOpen(false); }}>Home</a>
             <a href="#about" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('about'); setIsMenuOpen(false); }}>About me</a>
             <a href="#skills" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('skills'); setIsMenuOpen(false); }}>Skills</a>
-            <a href="#projects" className="nav-link active" onClick={e => { e.preventDefault(); setCurrentPage('projects'); setIsMenuOpen(false); }}>My project</a>
+            <a href="#projects" className="nav-link active" onClick={e => { e.preventDefault(); setCurrentPage('projects'); setIsMenuOpen(false); }}>My Projects</a>
             <a href="#service" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('service'); setIsMenuOpen(false); }}>Service</a>
             <a href="#contact" className="nav-link" onClick={e => { e.preventDefault(); setCurrentPage('contact'); setIsMenuOpen(false); }}>Contact</a>
           </div>
