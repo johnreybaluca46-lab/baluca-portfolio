@@ -428,7 +428,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
             <section className="myproject-preview has-cyber-pattern" ref={previewRef}>
               {selectedFile ? (
                 selectedFile.id === 'Rgblightcontrol' ? (
-                  <div className="w-full max-w-4xl mx-auto custom-scrollbar" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
+                  <div className="w-full max-w-4xl mx-auto" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
                     <div className="text-center mb-8 md:mb-12 mt-4 h-[40px] flex justify-center items-center">
                       <h1 ref={rgbTitleRef} className="text-[#1e90ff] text-lg md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
                         RGB LIGHT CONTROL
@@ -502,7 +502,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                     </div>
                   </div>
                 ) : selectedFile.id === 'Gradecalculator' ? (
-                  <div className="w-full max-w-4xl mx-auto custom-scrollbar" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
+                  <div className="w-full max-w-4xl mx-auto" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
                     <div className="text-center mb-8 md:mb-12 mt-4 h-[40px] flex justify-center items-center">
                       <h1 ref={gradeCalcTitleRef} className="text-[#1e90ff] text-lg md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
                         GRADE CALCULATOR
@@ -552,7 +552,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                     </div>
                   </div>
                 ) : selectedFile.id === 'Balucaportfolio' ? (
-                  <div className="w-full max-w-4xl mx-auto custom-scrollbar" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
+                  <div className="w-full max-w-4xl mx-auto" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
                     <div className="text-center mb-8 md:mb-12 mt-4 h-[40px] flex justify-center items-center">
                       <h1 ref={balucaPortfolioTitleRef} className="text-[#1e90ff] text-lg md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
                         BALUCA PORTFOLIO

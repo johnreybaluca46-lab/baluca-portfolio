@@ -9,10 +9,11 @@
   overflow-x: hidden;
   background: #ffffff;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease;
   scroll-behavior: smooth;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .myproject-section *,
@@ -23,7 +24,6 @@
 
 .myproject-section.show {
   opacity: 1;
-  transform: translateY(0);
 }
 
 /* ─────────────────────────────────────────────
@@ -699,12 +699,13 @@
   color: #52525b;
 }
 
+
 /* ─────────────────────────────────────────────
    WATER TRANSITION ZONE
 ───────────────────────────────────────────── */
 .myproject-water-zone {
   position: relative;
-  margin-top: 4rem;
+  margin-top: auto;
 }
 
 .myproject-waves-container {
