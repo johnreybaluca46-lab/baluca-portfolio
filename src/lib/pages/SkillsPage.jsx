@@ -22,6 +22,7 @@ import vscodeIcon from '../../assets/logo/vs code ide.png';
 import photoshopIcon from '../../assets/logo/photoshop.png';
 import figmaIcon from '../../assets/logo/figma.png';
 import drawioIcon from '../../assets/logo/draw io.webp';
+import viteIcon from '../../assets/logo/vite.png';
 
 
 /* ── 3D Tool Card ── */
@@ -157,7 +158,8 @@ const SkillsPage = ({ show, setCurrentPage }) => {
     level4: [
       { name: 'Node.js', icon: nodeIcon, percentage: 75, description: 'Building REST APIs and backend services using Express and standard Node packages.' },
       { name: 'Tailwind CSS', icon: tailwindIcon, percentage: 85, description: 'Rapidly building responsive interfaces utilizing Tailwind utility classes and config.' },
-      { name: 'Dart', icon: dartIcon, percentage: 70, description: 'Writing Dart code primarily for Flutter application development, utilizing strict typing.' }
+      { name: 'Dart', icon: dartIcon, percentage: 70, description: 'Writing Dart code primarily for Flutter application development, utilizing strict typing.' },
+      { name: 'Vite', icon: viteIcon, percentage: 85, description: 'Next-generation front-end tooling for fast and optimized web development.' }
     ],
     level5: [
       { name: 'C++', icon: cppIcon, percentage: 60, description: 'Understanding of object-oriented programming, pointers, and memory management in C++.' },

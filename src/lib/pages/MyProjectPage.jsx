@@ -23,6 +23,9 @@ import reactIcon from '../../assets/logo/react js.png';
 import tailwindIcon from '../../assets/logo/tailwind css.png';
 import nodeIcon from '../../assets/logo/node js.png';
 import githubIcon from '../../assets/logo/github.png';
+import viteIcon from '../../assets/logo/vite.png';
+import bdrsLogo from '../../assets/my project assets/web_project_assets/bdrs assets/barangay buluan seal 1.png';
+import bdrsScreenshot from '../../assets/my project assets/web_project_assets/bdrs assets/bdrs screenshot.png';
 
 /* ─────────────────────────────────────────────
    Tech Card Component (Flip)
@@ -83,8 +86,8 @@ const FileIcon = () => (
    Change the numbers below to update the cards
 ───────────────────────────────────────────── */
 const STATS = {
-  myProjects: 3,           // ← edit this number
-  deployedProjects: 1,     // ← edit this number
+  myProjects: 4,           // ← edit this number
+  deployedProjects: 2,     // ← edit this number
   completeProjects: 0,     // ← edit this number
 };
 
@@ -124,7 +127,7 @@ const projectData = [
         label: 'WEB PROJECT',
         children: [
           { id: 'Balucaportfolio', label: 'Balucaportfolio.webapp', isFile: true, tech: 'React + Vite', description: 'A personal portfolio web application.' },
-          { id: 'web-2', label: 'EMPTY', isFile: true, tech: 'Web', description: 'Upcoming web project — coming soon.' },
+          { id: 'bdrs', label: 'BDRS.webapp', isFile: true, tech: 'React + Firebase', description: 'Barangay Buluan Document Request System.' },
         ],
       },
     ],
@@ -161,7 +164,7 @@ const projectData = [
         label: 'DEPLOYED WEB PROJECT',
         children: [
           { id: 'deployed-baluca', label: 'Balucaportfolio.webapp.deployed', isFile: true, tech: 'Web / GitHub', description: 'Deployed version of Baluca Portfolio.' },
-          { id: 'd-web-2', label: 'EMPTY', isFile: true, tech: 'Web', description: 'Deployed web project — coming soon.' },
+          { id: 'deployed-bdrs', label: 'BDRS.webapp.deployed', isFile: true, tech: 'Web / Firebase', description: 'Deployed version of Barangay Buluan Document Request System.' },
         ],
       },
     ],
@@ -289,6 +292,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
   const rgbTitleRef = useRef(null);
   const gradeCalcTitleRef = useRef(null);
   const balucaPortfolioTitleRef = useRef(null);
+  const bdrsTitleRef = useRef(null);
   const previewRef = useRef(null);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -365,6 +369,8 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
       runAnimation(gradeCalcTitleRef.current);
     } else if (selectedFile?.id === 'Balucaportfolio') {
       runAnimation(balucaPortfolioTitleRef.current);
+    } else if (selectedFile?.id === 'bdrs') {
+      runAnimation(bdrsTitleRef.current);
     }
     return () => cleanups.forEach((fn) => fn());
   }, [selectedFile]);
@@ -428,7 +434,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
             <section className="myproject-preview has-cyber-pattern" ref={previewRef}>
               {selectedFile ? (
                 selectedFile.id === 'Rgblightcontrol' ? (
-                  <div className="w-full max-w-4xl mx-auto" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
+                  <div className="w-full max-w-4xl mx-auto px-4 md:px-0">
                     <div className="text-center mb-8 md:mb-12 mt-4 h-[40px] flex justify-center items-center">
                       <h1 ref={rgbTitleRef} className="text-[#1e90ff] text-lg md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
                         RGB LIGHT CONTROL
@@ -436,7 +442,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-8 mb-8">
-                      <div className="flex-1">
+                      <div className="md:flex-1">
                         <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">ABOUT THIS PROJECT</h2>
                         <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify mb-4">
                           The RGB Light Control project is an innovative integration of mobile software and open-source hardware. Built using Flutter for the front-end application and Arduino for the microcontroller logic, this project allows users to wirelessly manage RGB LED setups.
@@ -502,7 +508,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                     </div>
                   </div>
                 ) : selectedFile.id === 'Gradecalculator' ? (
-                  <div className="w-full max-w-4xl mx-auto" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
+                  <div className="w-full max-w-4xl mx-auto px-4 md:px-0">
                     <div className="text-center mb-8 md:mb-12 mt-4 h-[40px] flex justify-center items-center">
                       <h1 ref={gradeCalcTitleRef} className="text-[#1e90ff] text-lg md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
                         GRADE CALCULATOR
@@ -510,7 +516,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-8 mb-8">
-                      <div className="flex-1">
+                      <div className="md:flex-1">
                         <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">ABOUT THIS PROJECT</h2>
                         <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify mb-4">
                           The Grade Calculator is a comprehensive academic tool designed to help students track and manage their course performance efficiently. Built with Flutter, it provides a seamless cross-platform experience, allowing users to calculate both their General Weighted Average (GWA) and Grade Point Average (GPA), monitor individual subject grades, and project required scores for future assignments.
@@ -552,7 +558,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                     </div>
                   </div>
                 ) : selectedFile.id === 'Balucaportfolio' ? (
-                  <div className="w-full max-w-4xl mx-auto" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
+                  <div className="w-full max-w-4xl mx-auto px-4 md:px-0">
                     <div className="text-center mb-8 md:mb-12 mt-4 h-[40px] flex justify-center items-center">
                       <h1 ref={balucaPortfolioTitleRef} className="text-[#1e90ff] text-lg md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
                         BALUCA PORTFOLIO
@@ -560,7 +566,7 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-8 mb-8">
-                      <div className="flex-1">
+                      <div className="md:flex-1">
                         <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">ABOUT THIS PROJECT</h2>
                         <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify mb-4">
                           Baluca Portfolio is a modern and responsive web application designed to showcase my skills, projects, and professional journey as a developer. It serves as a centralized platform where visitors can explore my work in web development, mobile application development, and Arduino-based IoT projects. Built with performance, accessibility, and user experience in mind, the portfolio features a clean interface, responsive layouts, and organized project presentations. This web application reflects my passion for creating high-quality digital solutions while continuously improving my technical expertise and problem-solving skills. It also provides an easy way for potential clients, employers, and collaborators to learn more about me and connect for future opportunities.
@@ -601,11 +607,61 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                       </div>
                     </div>
                   </div>
+                ) : selectedFile.id === 'bdrs' ? (
+                  <div className="w-full max-w-4xl mx-auto px-4 md:px-0">
+                    <div className="text-center mb-8 md:mb-12 mt-4 h-[40px] flex justify-center items-center">
+                      <h1 ref={bdrsTitleRef} className="text-[#1e90ff] text-lg md:text-3xl font-extrabold uppercase tracking-wider inline-block m-0">
+                        BDRS
+                      </h1>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row gap-8 mb-8">
+                      <div className="md:flex-1">
+                        <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">ABOUT THIS PROJECT</h2>
+                        <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify mb-4">
+                          Barangay Buluan Document Request System (BDRS) is a web-based system designed to make barangay document requests faster, easier, and more organized. It allows residents to submit requests online, receive a unique request or polling number, and track the status of their documents. The system also helps barangay staff manage resident information, verify requests, approve documents, and maintain organized digital records.
+                        </p>
+                      </div>
+                      <div className="w-full md:w-1/3 flex justify-center items-start">
+                        <div className="p-4 md:p-6 rounded-2xl flex justify-center items-center w-full">
+                          <img src={bdrsLogo} alt="BDRS Logo" className="w-28 md:w-full max-w-[200px] object-contain" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mb-8 md:mb-10">
+                      <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">DESCRIPTION</h2>
+                      <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify">
+                        The Barangay Buluan Document Request System provides a convenient platform for residents of Barangay Buluan, Ipil, Zamboanga Sibugay to request official documents such as Barangay Clearance, Certificate of Residency, Certificate of Indigency, and Business Clearance. Residents can complete the required form, upload valid identification, review their information, and submit their request online. After submission, residents are instructed to visit the Barangay Hall for verification and approval. On the administrative side, barangay personnel can manage requests, verify resident information, approve or reject applications, monitor document status, and maintain accurate records. This system aims to reduce manual processing, improve efficiency, and provide faster and more reliable barangay services.
+                      </p>
+                    </div>
+
+                    <div className="mb-8 md:mb-10">
+                      <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-6 uppercase tracking-wide">SCREENSHOT APPLICATION</h2>
+                      <div className="flex justify-center">
+                        <img src={bdrsScreenshot} alt="Screenshot Application" className="w-full max-w-4xl rounded-lg" />
+                      </div>
+                    </div>
+
+                    <div className="mb-8 md:mb-10">
+                      <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-6 uppercase tracking-wide">TECHNOLOGIES USED</h2>
+                      <div className="flex flex-wrap gap-4 md:gap-6 justify-center">
+                        <TechCard name="CSS 3" icon={cssIcon} description="Used for styling." />
+                        <TechCard name="Javascript" icon={jsIcon} description="Core logic and interactivity." />
+                        <TechCard name="Firebase" icon={firebaseIcon} description="Used for database and hosting." />
+                        <TechCard name="Antigravity" icon={antigravityIcon} description="AI-assisted development." />
+                        <TechCard name="React.Js" icon={reactIcon} description="Frontend UI library." />
+                        <TechCard name="HTML 5" icon={htmlIcon} description="Core structure of the web application." />
+                        <TechCard name="Node.Js" icon={nodeIcon} description="Backend runtime environment." />
+                        <TechCard name="Vite" icon={viteIcon} description="Next-generation front-end tooling." />
+                      </div>
+                    </div>
+                  </div>
                 ) : selectedFile.id === 'deployed-baluca' ? (
-                  <div className="w-full max-w-4xl mx-auto custom-scrollbar" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '1rem' }}>
+                  <div className="w-full max-w-4xl mx-auto px-4 md:px-0">
                     <div className="mb-8 md:mb-12 mt-4">
                       <div className="flex flex-col md:flex-row gap-8 mb-8">
-                        <div className="flex-1">
+                        <div className="md:flex-1">
                           <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">ABOUT THIS PROJECT DEPLOYED</h2>
                           <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify mb-4">
                             This project is successfully deployed using GitHub Pages, allowing the portfolio to be accessed online through a fast, secure, and reliable hosting platform. GitHub serves as both the source code repository and deployment service, making it easy to manage updates through version control. Every improvement, feature, and bug fix is tracked using Git, ensuring a smooth development workflow. By deploying with GitHub Pages, visitors can explore the latest version of the Baluca Portfolio from any device, demonstrating modern web development practices, continuous deployment, and responsive design.
@@ -628,6 +684,36 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
                         <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-6 uppercase tracking-wide">HOSTING ENGINE USE</h2>
                         <div className="flex justify-start">
                           <TechCard name="GITHUB" icon={githubIcon} description="Used for version control and hosting via GitHub Pages." />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : selectedFile.id === 'deployed-bdrs' ? (
+                  <div className="w-full max-w-4xl mx-auto px-4 md:px-0">
+                    <div className="mb-8 md:mb-12 mt-4">
+                      <div className="flex flex-col md:flex-row gap-8 mb-8">
+                        <div className="md:flex-1">
+                          <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">ABOUT THIS PROJECT DEPLOYED</h2>
+                          <p className="text-black font-medium text-xs md:text-base leading-relaxed text-justify mb-4">
+                            This project is successfully deployed using Firebase, allowing the system to be accessed online through a fast, secure, and reliable hosting platform. Firebase serves as both the backend database and deployment service, making it easy to manage updates and user data in real-time. Every improvement, feature, and bug fix ensures a smooth operational workflow for the barangay. By deploying with Firebase, residents can explore and use the BDRS from any device, demonstrating modern web development practices, continuous deployment, and responsive design.
+                          </p>
+                        </div>
+                        <div className="w-full md:w-1/3 flex justify-center items-center">
+                          <img src={bdrsLogo} alt="BDRS Logo" className="w-28 md:w-full max-w-[200px] object-contain" />
+                        </div>
+                      </div>
+
+                      <div className="mb-8 md:mb-10">
+                        <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-4 uppercase tracking-wide">YOU ARE ALREADY VISIT THIS SITE</h2>
+                        <a href="https://bdrs-a4bd0.web.app/" target="_blank" rel="noopener noreferrer" className="relative flex items-center justify-center bg-[#2ecc71] hover:bg-[#27ae60] text-white font-bold py-4 rounded-xl transition-colors duration-300 w-full shadow-md text-lg md:text-xl">
+                          TAP TO VISIT THIS SITE
+                        </a>
+                      </div>
+
+                      <div className="mb-8 md:mb-10">
+                        <h2 className="text-[#1e90ff] text-base md:text-xl font-bold mb-2 md:mb-6 uppercase tracking-wide">HOSTING ENGINE USE</h2>
+                        <div className="flex justify-start">
+                          <TechCard name="Firebase" icon={firebaseIcon} description="Used for database and hosting." />
                         </div>
                       </div>
                     </div>

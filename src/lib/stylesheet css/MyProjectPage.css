@@ -184,6 +184,7 @@
   padding: 0 3rem;
   /* Adjusted padding to allow more width */
   align-items: flex-start;
+  flex-shrink: 0;
 }
 
 /* ─────────────────────────────────────────────
@@ -871,6 +872,7 @@
     box-sizing: border-box;
     width: 100%;
     overflow-x: hidden;
+    flex-shrink: 0;
   }
 
   .myproject-sidebar {
