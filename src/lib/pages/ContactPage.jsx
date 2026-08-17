@@ -1,6 +1,6 @@
 import { db } from '../../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import emailjs from '@emailjs/browser';
+
 
 import { useState, useEffect, useRef } from 'react';
 import '../stylesheet css/ContactPage.css';
@@ -119,17 +119,24 @@ const ContactPage = ({ show, setCurrentPage }) => {
         timestamp: serverTimestamp(),
       });
 
-      // Send Email to Gmail via EmailJS
-      await emailjs.send(
-        'service_1n2k6sf',    // 🔴 Replace with your EmailJS Service ID
-        'template_jezj2be',   // 🔴 Replace with your EmailJS Template ID
-        {
+      // Send Email via Custom Backend (Gmail API)
+      const response = await fetch('http://localhost:5000/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           message: formData.message,
-        },
-        'fy21VopOUVrxljrdC'     // 🔴 Replace with your EmailJS Public Key
-      );
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send email');
+      }
 
       setShowErrorAlert(false);
       setShowSuccessAlert(true);
