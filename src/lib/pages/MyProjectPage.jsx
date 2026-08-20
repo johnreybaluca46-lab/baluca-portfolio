@@ -298,14 +298,12 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollUp, setShowScrollUp] = useState(false);
 
-  // Show/hide scroll-up button based on scroll position (mobile/tablet only)
+  // Show/hide scroll-up button based on scroll position
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
     const handleScroll = () => {
-      if (window.innerWidth < 1024) {
-        setShowScrollUp(section.scrollTop > 200);
-      }
+      setShowScrollUp(section.scrollTop > 500);
     };
     section.addEventListener('scroll', handleScroll);
     return () => section.removeEventListener('scroll', handleScroll);
@@ -782,16 +780,16 @@ const MyProjectPage = ({ show, setCurrentPage }) => {
         </div>
       </div>
 
-      {/* Scroll-up button — sibling to myproject-section, outside transform context */}
-      <button
-        className={`scroll-up-btn ${showScrollUp ? 'scroll-up-btn--visible' : ''}`}
+      {/* Scroll-up button */}
+      <div
+        className={`scroll-to-top-btn ${showScrollUp ? 'visible' : ''}`}
         onClick={scrollToTop}
         aria-label="Scroll to top"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="18 15 12 9 6 15" />
         </svg>
-      </button>
+      </div>
     </>
   );
 };

@@ -199,15 +199,15 @@ const SkillsPage = ({ show, setCurrentPage }) => {
       {/* Header Titles */}
       <div className="skills-header-container">
         <div className="skills-title-content">
-          <h2>SKILLS & TECHNOLOGIES</h2>
-          <h2>SKILLS & TECHNOLOGIES</h2>
+          <h2>MY SKILLS &amp; TECHNOLOGIES</h2>
+          <h2>MY SKILLS &amp; TECHNOLOGIES</h2>
         </div>
       </div>
 
       {/* ── SKILLS GRID: 5 cards per row ── */}
       <div className="skills-grid-wrapper">
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h3 className="skills-subtitle" ref={title1Ref}>My Skills &amp; Technologies</h3>
+          <h3 className="skills-subtitle" ref={title1Ref}>Tech Stack</h3>
         </div>
         <div className="skills-grid-5col">
           {[
