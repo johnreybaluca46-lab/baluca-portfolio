@@ -190,9 +190,12 @@ const TimelineItem = ({ side, title, description }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        setIsVisible(entries[0].isIntersecting);
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          if (itemRef.current) observer.unobserve(itemRef.current);
+        }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
     if (itemRef.current) observer.observe(itemRef.current);
     return () => observer.disconnect();
@@ -222,6 +225,8 @@ const HomePage = ({ show, setCurrentPage }) => {
   const cardsRef = useRef(null);
   const timelineRef = useRef(null);
   const containerRef = useRef(null);
+  const lastScrollTop = useRef(0);
+  const [isScrollingUp, setIsScrollingUp] = useState(false);
 
   useEffect(() => {
     const cardsObserver = new IntersectionObserver(
@@ -235,6 +240,10 @@ const HomePage = ({ show, setCurrentPage }) => {
     const indicatorTimer = setTimeout(() => {
       setShowScrollIndicator(true);
     }, 3500);
+
+    const initialPhoneAnimTimer = setTimeout(() => {
+      setIsScrollingUp(true);
+    }, 800);
 
     const timelineObserver = new IntersectionObserver(
       (entries) => {
@@ -255,6 +264,21 @@ const HomePage = ({ show, setCurrentPage }) => {
       } else {
         setShowScrollTop(false);
       }
+      
+      const currentScroll = container.scrollTop;
+      
+      // Determine scroll direction
+      if (currentScroll > lastScrollTop.current + 5) {
+        setIsScrollingUp(false); // scrolling down
+      } else if (currentScroll < lastScrollTop.current - 5) {
+        setIsScrollingUp(true); // scrolling up
+      }
+      
+      // Keep it up if at the very top
+      if (currentScroll < 50) {
+        setIsScrollingUp(true);
+      }
+      lastScrollTop.current = currentScroll;
 
       const rect = timelineRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
@@ -289,6 +313,7 @@ const HomePage = ({ show, setCurrentPage }) => {
         container.removeEventListener('scroll', handleScroll);
       }
       clearTimeout(indicatorTimer);
+      clearTimeout(initialPhoneAnimTimer);
     };
   }, []);
 
@@ -331,61 +356,80 @@ const HomePage = ({ show, setCurrentPage }) => {
             <h2>HOME</h2>
             <h2>HOME</h2>
           </div>
-          <h1 className="text-base sm:text-3xl lg:text-5xl font-bold mb-1 sm:mb-4 fade-in-up" style={{ '--i': 1 }}>
+          <h1 className="text-base sm:text-2xl lg:text-4xl font-bold mb-1 sm:mb-4 fade-in-up" style={{ '--i': 1 }}>
             <span className="text-[#1e90ff]">Hello, I'm</span> Johnrey V. Baluca
           </h1>
-          <h2 className="text-sm sm:text-2xl md:text-3xl font-bold mb-0.5 sm:mb-2 fade-in-up" style={{ '--i': 2 }}>
+          <h2 className="text-sm sm:text-xl md:text-2xl font-bold mb-0.5 sm:mb-2 fade-in-up" style={{ '--i': 2 }}>
             Web <span className="text-[#1e90ff]">Development</span>
           </h2>
-          <h2 className="text-sm sm:text-2xl md:text-3xl font-bold mb-1.5 sm:mb-6 fade-in-up" style={{ '--i': 3 }}>
+          <h2 className="text-sm sm:text-xl md:text-2xl font-bold mb-1.5 sm:mb-6 fade-in-up" style={{ '--i': 3 }}>
             Application <span className="text-[#1e90ff]">Development</span>
           </h2>
-          <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-snug sm:leading-relaxed mb-3 sm:mb-8 max-w-xl text-justify font-medium fade-in-up" style={{ '--i': 4 }}>
+          <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-snug sm:leading-relaxed mb-3 sm:mb-8 max-w-xl text-justify font-medium fade-in-up" style={{ '--i': 4 }}>
             <ScrambleText 
               trigger={true} 
               text="I am Johnrey Baluca, an Application Developer and Web Developer passionate about creating innovative, user-friendly, and efficient digital solutions. I specialize in designing, developing, and maintaining responsive web applications, focusing on functionality, performance, and user experience. I continuously improve my skills, embrace new technologies, and strive to deliver high-quality software." 
             />
           </p>
-          {/* Hidden on mobile and tablet — accessible via hamburger menu */}
-          <div className="hidden lg:grid" style={{ gridTemplateColumns: 'repeat(3, auto)', gap: '1.2rem', marginTop: '1.5rem', justifyContent: 'start' }}>
-            <FancyButton style={{ '--i': 5 }} className="w-44 h-13 text-sm sm:text-base" onClick={() => setCurrentPage('about')}>About me</FancyButton>
-            <FancyButton style={{ '--i': 6 }} className="w-44 h-13 text-sm sm:text-base" onClick={() => setCurrentPage('skills')}>Skills</FancyButton>
-            <FancyButton style={{ '--i': 7 }} className="w-44 h-13 text-sm sm:text-base" onClick={() => setCurrentPage('projects')}>My projects</FancyButton>
-            <FancyButton style={{ '--i': 8 }} className="w-44 h-13 text-sm sm:text-base" onClick={() => setCurrentPage('service')}>Service</FancyButton>
-            <FancyButton style={{ '--i': 9 }} className="w-44 h-13 text-sm sm:text-base" onClick={() => setCurrentPage('contact')}>Get in touch</FancyButton>
-          </div>
-        </div>
-        
-        {/* Scroll Down Indicator */}
-        <div className={`scroll-down-indicator ${!cardsVisible && showScrollIndicator ? 'visible' : ''}`}>
-          Scroll Down
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
         </div>
       </div>
 
-      {/* Right Section - White Background with Matrix and Image */}
-      <div className="right-section">
-        {/* Matrix Background */}
-        <div className="matrix-container">
-          <MatrixPattern />
-          <MatrixPattern />
-          <MatrixPattern />
-          <MatrixPattern />
-          <MatrixPattern />
-        </div>
+      {/* Right Section - Phone UI with Matrix and Image */}
+      <div className="right-section" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="phone-card" style={{ zIndex: 2 }}>
+          <div className={`phone ${isScrollingUp ? 'is-animated' : ''}`}>
+            <div className="face front">
+              
+              {/* Profile Background inside the phone */}
+              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '5px', overflow: 'hidden', zIndex: 0 }}>
+                <div className="matrix-container" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.8, zIndex: 0 }}>
+                  <MatrixPattern />
+                  <MatrixPattern />
+                  <MatrixPattern />
+                </div>
+                <img
+                  src={profileImg}
+                  alt="Johnrey V. Baluca"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'relative', zIndex: 1 }}
+                />
+              </div>
 
-        {/* Profile Image Overlay */}
-        <div className="profile-image-container">
-          <img
-            src={profileImg}
-            alt="Johnrey V. Baluca"
-            className="profile-image"
-          />
+
+
+
+              <div className="navigation" style={{ zIndex: 10 }}>
+                <span className="btn btn-task"></span>
+                <span className="btn btn-home"></span>
+                <span className="btn btn-back"></span>
+              </div>
+
+              <div className="front-camera" style={{ zIndex: 20 }}></div>
+            </div>
+
+            <div className="face back">back</div>
+            <div className="face top"></div>
+            <div className="face bottom">
+              <div className="elements">
+                <span className="headphone"></span>
+                <span className="microphone"></span>
+                <span className="charge"></span>
+                <span className="speaker"></span>
+              </div>
+            </div>
+            <div className="face left"></div>
+            <div className="face right"></div>
+          </div>
         </div>
       </div>
       
+      {/* Scroll Down Indicator */}
+      <div className={`scroll-down-indicator ${!cardsVisible && showScrollIndicator ? 'visible' : ''}`}>
+        Scroll Down
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+
       </div>
 
       {/* Combined Cards and Experience Section */}
