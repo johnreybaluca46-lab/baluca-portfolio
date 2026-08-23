@@ -7,6 +7,7 @@ import PageTransition from './lib/pages/PageTransition';
 import MyProjectPage from './lib/pages/MyProjectPage';
 import ServicePage from './lib/pages/ServicePage';
 import ContactPage from './lib/pages/ContactPage';
+import CursorRingField from './components/originkit/ui/cursor-ring-field';
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -35,7 +36,14 @@ function App() {
   };
 
   return (
-    <div className="App" style={{ height: '100vh', overflow: 'hidden' }}>
+    <div className="App" style={{ height: '100vh', overflow: 'hidden', position: 'relative' }}>
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, backgroundColor: 'white' }}>
+        <CursorRingField 
+          background="transparent" 
+          colors={["#7189ff", "#3074f9", "#0b0b18"]} 
+          style={{ opacity: 0.2 }}
+        />
+      </div>
       {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
 
       {transitioning && (

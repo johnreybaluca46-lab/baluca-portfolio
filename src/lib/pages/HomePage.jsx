@@ -103,6 +103,67 @@ const ScrambleText = ({ text, trigger }) => {
   return <span ref={elRef}>{text}</span>;
 };
 
+const TypewriterText = ({ text, trigger, speed = 100, renderText, loop = false, loopStartIndex = 0, pauseDuration = 2000 }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (!trigger) {
+      setDisplayedText('');
+      setIsDeleting(false);
+      setIsPaused(false);
+      return;
+    }
+
+    if (isPaused) return;
+
+    let timeout;
+    
+    if (!isDeleting) {
+      if (displayedText.length < text.length) {
+        timeout = setTimeout(() => {
+          setDisplayedText(text.slice(0, displayedText.length + 1));
+        }, speed);
+      } else if (loop) {
+        setIsPaused(true);
+        timeout = setTimeout(() => {
+          setIsPaused(false);
+          setIsDeleting(true);
+        }, pauseDuration);
+      }
+    } else {
+      if (displayedText.length > loopStartIndex) {
+        timeout = setTimeout(() => {
+          setDisplayedText(text.slice(0, displayedText.length - 1));
+        }, speed);
+      } else {
+        setIsPaused(true);
+        timeout = setTimeout(() => {
+          setIsPaused(false);
+          setIsDeleting(false);
+        }, pauseDuration / 2);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, isPaused, text, trigger, speed, loop, loopStartIndex, pauseDuration]);
+
+  return (
+    <span>
+      {renderText ? renderText(displayedText) : displayedText}
+      {trigger && (
+        <span style={{ 
+          opacity: 1, 
+          animation: 'typewriter-blink 1s step-end infinite',
+          marginLeft: '2px',
+          color: 'inherit'
+        }}>|</span>
+      )}
+    </span>
+  );
+};
+
 const ServiceCard = ({ title, description, skills, className }) => {
   const [activeSkillIndex, setActiveSkillIndex] = useState(0);
 
@@ -357,7 +418,27 @@ const HomePage = ({ show, setCurrentPage }) => {
             <h2>HOME</h2>
           </div>
           <h1 className="text-base sm:text-2xl lg:text-4xl font-bold mb-1 sm:mb-4 fade-in-up" style={{ '--i': 1 }}>
-            <span className="text-[#1e90ff]">Hello, I'm</span> Johnrey V. Baluca
+            <TypewriterText 
+              text="Hello, I'm Johnrey V. Baluca" 
+              trigger={true} 
+              speed={150}
+              loop={true}
+              loopStartIndex={11}
+              pauseDuration={3000}
+              renderText={(displayedText) => {
+                const bluePart = "Hello, I'm ";
+                if (displayedText.length <= bluePart.length) {
+                  return <span className="text-[#1e90ff]">{displayedText}</span>;
+                } else {
+                  return (
+                    <>
+                      <span className="text-[#1e90ff]">{bluePart}</span>
+                      {displayedText.slice(bluePart.length)}
+                    </>
+                  );
+                }
+              }}
+            />
           </h1>
           <h2 className="text-sm sm:text-xl md:text-2xl font-bold mb-0.5 sm:mb-2 fade-in-up" style={{ '--i': 2 }}>
             Web <span className="text-[#1e90ff]">Development</span>
@@ -382,11 +463,6 @@ const HomePage = ({ show, setCurrentPage }) => {
               
               {/* Profile Background inside the phone */}
               <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '5px', overflow: 'hidden', zIndex: 0 }}>
-                <div className="matrix-container" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.8, zIndex: 0 }}>
-                  <MatrixPattern />
-                  <MatrixPattern />
-                  <MatrixPattern />
-                </div>
                 <img
                   src={profileImg}
                   alt="Johnrey V. Baluca"
@@ -525,8 +601,8 @@ const HomePage = ({ show, setCurrentPage }) => {
           />
         </div>
 
-        <div className="carousel-wrapper">
-          <div className="carousel-inner" style={{ '--quantity': 10 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '4rem 0', width: '100%', overflow: 'hidden', padding: '4rem 0' }}>
+          <div className="card-3d">
             {[
               reactIcon,
               pythonIcon,
@@ -539,10 +615,10 @@ const HomePage = ({ show, setCurrentPage }) => {
               dartIcon,
               mysqlIcon
             ].map((logo, idx) => (
-              <div key={idx} className="carousel-card" style={{ '--index': idx }}>
+              <div key={idx} className="card-3d-item">
                 <div className="carousel-card-border-tl"></div>
                 <div className="carousel-card-border-br"></div>
-                <img src={logo} alt={`carousel-skill-${idx}`} className="carousel-logo" />
+                <img src={logo} alt={`carousel-skill-${idx}`} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '1.5rem', zIndex: 1 }} />
               </div>
             ))}
           </div>
