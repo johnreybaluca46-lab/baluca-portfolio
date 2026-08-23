@@ -2,7 +2,19 @@ import { useState, useEffect, useRef } from 'react';
 import '../stylesheet css/HomePage.css';
 import profileImg from '../../assets/images/its me.png';
 import bpLogo from '../../assets/logo/Baluca-portpolio logo.png';
+import { PerspectiveCarousel } from '../../components/ui/perspective-carousel';
 
+import img1 from '../../assets/images/1.jpg';
+import img2 from '../../assets/images/2.jpg';
+import img3 from '../../assets/images/3.jpg';
+import img4 from '../../assets/images/4.jpg';
+import img5 from '../../assets/images/5.jpg';
+import img6 from '../../assets/images/6.jpg';
+import img7 from '../../assets/images/7.jpg';
+import img8 from '../../assets/images/8.jpg';
+import img9 from '../../assets/images/9.png';
+import img10 from '../../assets/images/10.png';
+import img11 from '../../assets/images/11.jpg';
 import htmlIcon from '../../assets/logo/html-5.png';
 import cssIcon from '../../assets/logo/css-3.png';
 import jsIcon from '../../assets/logo/js.png';
@@ -460,9 +472,11 @@ const HomePage = ({ show, setCurrentPage }) => {
         <div className="phone-card" style={{ zIndex: 2 }}>
           <div className={`phone ${isScrollingUp ? 'is-animated' : ''}`}>
             <div className="face front">
-              
               {/* Profile Background inside the phone */}
-              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '5px', overflow: 'hidden', zIndex: 0 }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '5px', overflow: 'hidden', zIndex: 0, backgroundColor: 'white' }}>
+                <div className="matrix-container" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, background: 'transparent' }}>
+                  <MatrixPattern />
+                </div>
                 <img
                   src={profileImg}
                   alt="Johnrey V. Baluca"
@@ -622,6 +636,31 @@ const HomePage = ({ show, setCurrentPage }) => {
               </div>
             ))}
           </div>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '-2rem 0 4rem 0', width: '100%', overflow: 'hidden', padding: '0 0 4rem 0' }}>
+          <PerspectiveCarousel
+            items={[
+              { src: img1, title: "" },
+              { src: img2, title: "" },
+              { src: img3, title: "" },
+              { src: img4, title: "" },
+              { src: img5, title: "" },
+              { src: img6, title: "" },
+              { src: img7, title: "" },
+              { src: img8, title: "" },
+              { src: img9, title: "" },
+              { src: img10, title: "" },
+              { src: img11, title: "" },
+            ]}
+            defaultActiveIndex={5}
+            loop={true}
+            autoPlay={true}
+            autoPlayInterval={2500}
+            slideWidth={250}
+            showControls={false}
+            className="h-[560px] w-[100%] bg-transparent"
+          />
         </div>
       </div>
       </div>
