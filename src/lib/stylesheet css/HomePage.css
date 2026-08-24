@@ -1712,6 +1712,15 @@
   }
 }
 
+@keyframes autoRun3dReverse {
+  from {
+    transform: perspective(800px) rotateY(360deg);
+  }
+  to {
+    transform: perspective(800px) rotateY(0deg);
+  }
+}
+
 @keyframes animateBrightness {
   10% {
     filter: brightness(1);
@@ -1732,6 +1741,10 @@
   transform: perspective(1200px);
   animation: autoRun3d 20s linear infinite;
   will-change: transform;
+}
+
+.card-3d.reverse {
+  animation: autoRun3dReverse 20s linear infinite;
 }
 
 .card-3d-item {

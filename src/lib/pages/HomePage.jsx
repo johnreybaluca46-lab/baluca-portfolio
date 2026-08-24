@@ -288,7 +288,6 @@ const TimelineItem = ({ side, title, description }) => {
   );
 };
 
-
 const HomePage = ({ show, setCurrentPage }) => {
   const [navExpanded, setNavExpanded] = useState(false);
   const [cardsVisible, setCardsVisible] = useState(false);
@@ -638,7 +637,14 @@ const HomePage = ({ show, setCurrentPage }) => {
           </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '-2rem 0 4rem 0', width: '100%', overflow: 'hidden', padding: '0 0 4rem 0' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem 0 3rem 0', width: '100%' }}>
+          <div className="home-title-content fade-in-up" style={{ '--i': 0 }}>
+            <h2>My Teamates</h2>
+            <h2>My Teamates</h2>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', justifyContent: 'center', margin: '-2rem 0 4rem 0', width: '100%', overflow: 'hidden', padding: '0 0 4rem 0' }}>
           <PerspectiveCarousel
             items={[
               { src: img1, title: "" },
@@ -657,9 +663,34 @@ const HomePage = ({ show, setCurrentPage }) => {
             loop={true}
             autoPlay={true}
             autoPlayInterval={2500}
+            autoPlayDirection="forward"
             slideWidth={250}
             showControls={false}
-            className="h-[560px] w-[100%] bg-transparent"
+            className="h-[400px] w-[100%] bg-transparent"
+          />
+          <PerspectiveCarousel
+            items={[
+              { src: img1, title: "" },
+              { src: img2, title: "" },
+              { src: img3, title: "" },
+              { src: img4, title: "" },
+              { src: img5, title: "" },
+              { src: img6, title: "" },
+              { src: img7, title: "" },
+              { src: img8, title: "" },
+              { src: img9, title: "" },
+              { src: img10, title: "" },
+              { src: img11, title: "" },
+            ]}
+            defaultActiveIndex={5}
+            loop={true}
+            autoPlay={true}
+            autoPlayInterval={2500}
+            autoPlayDirection="backward"
+            autoPlayDelay={1250}
+            slideWidth={250}
+            showControls={false}
+            className="h-[400px] w-[100%] bg-transparent"
           />
         </div>
       </div>

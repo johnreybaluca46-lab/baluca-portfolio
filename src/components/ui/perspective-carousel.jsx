@@ -26,6 +26,8 @@ export function PerspectiveCarousel({
   showDots = true,
   autoPlay = false,
   autoPlayInterval = 3000,
+  autoPlayDirection = "forward",
+  autoPlayDelay = 0,
   viewportClassName,
   slideClassName,
   imageClassName,
@@ -37,9 +39,8 @@ export function PerspectiveCarousel({
   ...props
 }) {
   const maxIndex = Math.max(0, items.length - 1);
-  const [uncontrolledIndex, setUncontrolledIndex] = React.useState(() =>
-    clamp(defaultActiveIndex, 0, maxIndex));
-  const currentIndex = clamp(activeIndex ?? uncontrolledIndex, 0, maxIndex);
+  const [uncontrolledIndex, setUncontrolledIndex] = React.useState(() => defaultActiveIndex);
+  const currentIndex = activeIndex ?? uncontrolledIndex;
   const safeSlideWidth = Math.max(96, slideWidth);
   const safeInactiveScale = clamp(inactiveScale, 0.5, 1);
 
@@ -49,7 +50,7 @@ export function PerspectiveCarousel({
     }
 
     const resolvedIndex = loop
-      ? (nextIndex + items.length) % items.length
+      ? nextIndex
       : clamp(nextIndex, 0, maxIndex);
 
     if (activeIndex === undefined) {
@@ -59,13 +60,39 @@ export function PerspectiveCarousel({
     onActiveIndexChange?.(resolvedIndex);
   }, [activeIndex, items.length, loop, maxIndex, onActiveIndexChange]);
 
+  const currentIndexRef = React.useRef(currentIndex);
+  React.useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
   React.useEffect(() => {
     if (!autoPlay) return;
-    const timer = setInterval(() => {
-      selectSlide(currentIndex + 1);
-    }, autoPlayInterval);
-    return () => clearInterval(timer);
-  }, [autoPlay, autoPlayInterval, currentIndex, selectSlide]);
+    
+    let timer;
+    const startInterval = () => {
+      timer = setInterval(() => {
+        if (autoPlayDirection === "backward") {
+          selectSlide(currentIndexRef.current - 1);
+        } else {
+          selectSlide(currentIndexRef.current + 1);
+        }
+      }, autoPlayInterval);
+    };
+
+    let timeout;
+    if (autoPlayDelay > 0) {
+      timeout = setTimeout(() => {
+        startInterval();
+      }, autoPlayDelay);
+    } else {
+      startInterval();
+    }
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+      if (timer) clearInterval(timer);
+    };
+  }, [autoPlay, autoPlayInterval, autoPlayDelay, selectSlide, autoPlayDirection]);
 
   if (!items.length) {
     return null;
@@ -103,60 +130,62 @@ export function PerspectiveCarousel({
       <div
         className={cn("absolute inset-0 overflow-hidden", viewportClassName)}
         style={{ perspective: "1200px" }}>
-        <motion.div
-          className="absolute left-1/2 top-1/2 flex w-fit -translate-y-1/2 items-center"
-          animate={{ x: -(currentIndex * safeSlideWidth + safeSlideWidth / 2) }}
-          transition={transition}>
-          {items.map((item, index) => {
-            const isActive = currentIndex === index;
+        <div className="absolute left-1/2 top-1/2 flex h-full w-full items-center justify-center -translate-x-1/2 -translate-y-1/2">
+          {Array.from({ length: 15 }).map((_, i) => {
+            const offset = i - 7;
+            const absoluteIndex = currentIndex + offset;
+            
+            if (!loop && (absoluteIndex < 0 || absoluteIndex > maxIndex)) return null;
+
+            const itemIndex = ((absoluteIndex % items.length) + items.length) % items.length;
+            const item = items[itemIndex];
+            const isActive = offset === 0;
 
             return (
-              <div
-                key={`${item.src}-${index}`}
-                className="shrink-0"
-                style={{ width: safeSlideWidth, perspective: "1200px" }}>
-                <motion.div
-                  className={cn(
-                    "flex w-full flex-col items-center gap-3 will-change-transform",
-                    slideClassName
-                  )}
-                  animate={{
-                    rotateY: (currentIndex - index) * rotationStep,
-                    scale: isActive ? 1 : safeInactiveScale,
-                  }}
-                  transition={transition}
-                  style={{ transformStyle: "preserve-3d" }}>
-                  <button
-                    type="button"
-                    aria-label={`Show ${item.title}`}
-                    aria-current={isActive ? "true" : undefined}
-                    className="aspect-[3/4] w-full cursor-pointer"
-                    onClick={() => selectSlide(index)}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={item.src}
-                      alt={item.alt ?? item.title}
-                      draggable={false}
-                      className={cn(
-                        "h-full w-full select-none rounded-lg object-cover shadow-xl",
-                        imageClassName
-                      )} />
-                  </button>
+              <motion.div
+                key={`slide-${absoluteIndex}`}
+                className={cn("absolute flex w-fit flex-col items-center gap-3 will-change-transform", slideClassName)}
+                initial={{ 
+                  x: offset * safeSlideWidth, 
+                  rotateY: -offset * rotationStep, 
+                  scale: safeInactiveScale,
+                  opacity: 0
+                }}
+                animate={{
+                  x: offset * safeSlideWidth,
+                  rotateY: -offset * rotationStep,
+                  scale: isActive ? 1 : safeInactiveScale,
+                  opacity: 1,
+                  zIndex: 100 - Math.abs(offset)
+                }}
+                transition={transition}
+                style={{ width: safeSlideWidth, transformStyle: "preserve-3d" }}>
+                <button
+                  type="button"
+                  aria-label={`Show ${item.title}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className="aspect-[3/4] w-full cursor-pointer"
+                  onClick={() => selectSlide(absoluteIndex)}>
+                  <img
+                    src={item.src}
+                    alt={item.alt ?? item.title}
+                    draggable={false}
+                    className={cn("h-full w-full select-none rounded-lg object-cover shadow-xl", imageClassName)} />
+                </button>
 
-                  <motion.p
-                    className={cn("whitespace-nowrap text-sm", labelClassName)}
-                    animate={{
-                      filter: isActive ? "blur(0px)" : "blur(2px)",
-                      opacity: isActive ? 1 : 0,
-                    }}
-                    transition={transition}>
-                    {item.title}
-                  </motion.p>
-                </motion.div>
-              </div>
+                <motion.p
+                  className={cn("whitespace-nowrap text-sm", labelClassName)}
+                  animate={{
+                    filter: isActive ? "blur(0px)" : "blur(2px)",
+                    opacity: isActive ? 1 : 0,
+                  }}
+                  transition={transition}>
+                  {item.title}
+                </motion.p>
+              </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
 
       {showControls && (
@@ -176,18 +205,31 @@ export function PerspectiveCarousel({
 
           {showDots && (
             <div className="flex items-center justify-center gap-2">
-              {items.map((item, index) => (
-                <button
-                  key={`${item.title}-${index}`}
-                  type="button"
-                  aria-label={`Show slide ${index + 1}: ${item.title}`}
-                  aria-current={currentIndex === index ? "true" : undefined}
-                  className={cn(
-                    "h-2 rounded-full bg-current transition-[width,opacity] duration-300",
-                    currentIndex === index ? "w-7 opacity-100" : "w-2 opacity-30"
-                  )}
-                  onClick={() => selectSlide(index)} />
-              ))}
+              {items.map((item, index) => {
+                const currentModulo = ((currentIndex % items.length) + items.length) % items.length;
+                const isDotActive = currentModulo === index;
+                
+                return (
+                  <button
+                    key={`${item.title}-${index}`}
+                    type="button"
+                    aria-label={`Show slide ${index + 1}: ${item.title}`}
+                    aria-current={isDotActive ? "true" : undefined}
+                    className={cn(
+                      "h-2 rounded-full bg-current transition-[width,opacity] duration-300",
+                      isDotActive ? "w-7 opacity-100" : "w-2 opacity-30"
+                    )}
+                    onClick={() => {
+                      const diff = index - currentModulo;
+                      let optimalDiff = diff;
+                      if (loop) {
+                        if (diff > items.length / 2) optimalDiff -= items.length;
+                        else if (diff < -items.length / 2) optimalDiff += items.length;
+                      }
+                      selectSlide(currentIndex + optimalDiff);
+                    }} />
+                );
+              })}
             </div>
           )}
 
