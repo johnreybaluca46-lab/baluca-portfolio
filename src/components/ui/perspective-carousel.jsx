@@ -17,6 +17,7 @@ export function PerspectiveCarousel({
   activeIndex,
   defaultActiveIndex = 0,
   onActiveIndexChange,
+  onItemClick,
   loop = false,
   slideWidth = 200,
   rotationStep = 60,
@@ -165,7 +166,12 @@ export function PerspectiveCarousel({
                   aria-label={`Show ${item.title}`}
                   aria-current={isActive ? "true" : undefined}
                   className="aspect-[3/4] w-full cursor-pointer"
-                  onClick={() => selectSlide(absoluteIndex)}>
+                  onClick={() => {
+                    selectSlide(absoluteIndex);
+                    if (onItemClick) {
+                      onItemClick(item);
+                    }
+                  }}>
                   <img
                     src={item.src}
                     alt={item.alt ?? item.title}

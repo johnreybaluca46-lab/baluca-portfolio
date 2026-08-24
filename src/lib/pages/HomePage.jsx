@@ -15,6 +15,28 @@ import img8 from '../../assets/images/8.jpg';
 import img9 from '../../assets/images/9.png';
 import img10 from '../../assets/images/10.png';
 import img11 from '../../assets/images/11.jpg';
+import timg1 from '../../assets/images/my teamates/1.jpg';
+import timg2 from '../../assets/images/my teamates/2.jpg';
+import timg3 from '../../assets/images/my teamates/3.jpg';
+import timg4 from '../../assets/images/my teamates/4.jpg';
+import timg5 from '../../assets/images/my teamates/5.jpg';
+import timg6 from '../../assets/images/my teamates/6.jpg';
+import timg7 from '../../assets/images/my teamates/7.jpg';
+import timg8 from '../../assets/images/my teamates/8.jpg';
+import timg9 from '../../assets/images/my teamates/9.jpg';
+import timg10 from '../../assets/images/my teamates/10.jpg';
+import timg11 from '../../assets/images/my teamates/11.jpg';
+import timg12 from '../../assets/images/my teamates/12.jpg';
+import timg13 from '../../assets/images/my teamates/13.jpg';
+import timg14 from '../../assets/images/my teamates/14.jpg';
+import timg15 from '../../assets/images/my teamates/15.jpg';
+import timg16 from '../../assets/images/my teamates/16.jpg';
+import timg17 from '../../assets/images/my teamates/17.jpg';
+import timg18 from '../../assets/images/my teamates/18.jpg';
+import timg19 from '../../assets/images/my teamates/19.jpg';
+import timg20 from '../../assets/images/my teamates/20.jpg';
+import timg21 from '../../assets/images/my teamates/21.jpg';
+import timg22 from '../../assets/images/my teamates/22.jpg';
 import htmlIcon from '../../assets/logo/html-5.png';
 import cssIcon from '../../assets/logo/css-3.png';
 import jsIcon from '../../assets/logo/js.png';
@@ -294,6 +316,7 @@ const HomePage = ({ show, setCurrentPage }) => {
   const [timelineVisible, setTimelineVisible] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState(null);
   const cardsRef = useRef(null);
   const timelineRef = useRef(null);
   const containerRef = useRef(null);
@@ -358,12 +381,9 @@ const HomePage = ({ show, setCurrentPage }) => {
       const startPos = windowHeight * 0.75; 
       
       if (rect.top < startPos) {
-        const maxScroll = container.scrollHeight - container.clientHeight;
-        const currentScroll = container.scrollTop;
-        
-        // Calculate what rect.top will be when scrolled to the absolute bottom
-        const minRectTop = rect.top + currentScroll - maxScroll;
-        const distanceToScroll = startPos - minRectTop;
+        // The total distance we want the user to scroll to make progress go from 0 to 1
+        // is the height of the timeline container.
+        const distanceToScroll = rect.height;
         
         let progress = (startPos - rect.top) / distanceToScroll;
         progress = Math.max(0, Math.min(1, progress));
@@ -428,7 +448,7 @@ const HomePage = ({ show, setCurrentPage }) => {
             <h2>HOME</h2>
             <h2>HOME</h2>
           </div>
-          <h1 className="text-base sm:text-2xl lg:text-4xl font-bold mb-1 sm:mb-4 fade-in-up" style={{ '--i': 1 }}>
+          <h1 className="text-sm sm:text-2xl lg:text-4xl font-bold mb-1 sm:mb-4 fade-in-up" style={{ '--i': 1 }}>
             <TypewriterText 
               text="Hello, I'm Johnrey V. Baluca" 
               trigger={true} 
@@ -451,16 +471,22 @@ const HomePage = ({ show, setCurrentPage }) => {
               }}
             />
           </h1>
-          <h2 className="text-sm sm:text-xl md:text-2xl font-bold mb-0.5 sm:mb-2 fade-in-up" style={{ '--i': 2 }}>
+          <h2 className="text-xs sm:text-xl md:text-2xl font-bold mb-0.5 sm:mb-2 fade-in-up" style={{ '--i': 2 }}>
             Web <span className="text-[#1e90ff]">Development</span>
           </h2>
-          <h2 className="text-sm sm:text-xl md:text-2xl font-bold mb-1.5 sm:mb-6 fade-in-up" style={{ '--i': 3 }}>
+          <h2 className="text-xs sm:text-xl md:text-2xl font-bold mb-0.5 sm:mb-2 fade-in-up" style={{ '--i': 3 }}>
             Application <span className="text-[#1e90ff]">Development</span>
           </h2>
-          <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-snug sm:leading-relaxed mb-3 sm:mb-8 max-w-xl text-justify font-medium fade-in-up" style={{ '--i': 4 }}>
+          <h2 className="text-xs sm:text-xl md:text-2xl font-bold mb-0.5 sm:mb-2 fade-in-up" style={{ '--i': 4 }}>
+            Prompt <span className="text-[#1e90ff]">Engineer</span>
+          </h2>
+          <h2 className="text-xs sm:text-xl md:text-2xl font-bold mb-1.5 sm:mb-6 fade-in-up" style={{ '--i': 5 }}>
+            Vibe Coding <span className="text-[#1e90ff]">using AI Assistants</span>
+          </h2>
+          <p className="text-gray-600 text-[11px] sm:text-sm md:text-base leading-snug sm:leading-relaxed mb-3 sm:mb-8 max-w-xl text-justify font-medium fade-in-up" style={{ '--i': 6 }}>
             <ScrambleText 
               trigger={true} 
-              text="I am Johnrey Baluca, an Application Developer and Web Developer passionate about creating innovative, user-friendly, and efficient digital solutions. I specialize in designing, developing, and maintaining responsive web applications, focusing on functionality, performance, and user experience. I continuously improve my skills, embrace new technologies, and strive to deliver high-quality software." 
+              text="I am Johnrey Baluca, an Application Developer, Web Developer, and Prompt Engineer passionate about creating innovative, user-friendly, and efficient digital solutions through Vibe Coding using AI assistants. I specialize in designing, developing, and maintaining responsive web applications, focusing on functionality, performance, and user experience. I continuously improve my skills, embrace new technologies, and strive to deliver high-quality software." 
             />
           </p>
         </div>
@@ -647,18 +673,19 @@ const HomePage = ({ show, setCurrentPage }) => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', justifyContent: 'center', margin: '-2rem 0 4rem 0', width: '100%', overflow: 'hidden', padding: '0 0 4rem 0' }}>
           <PerspectiveCarousel
             items={[
-              { src: img1, title: "" },
-              { src: img2, title: "" },
-              { src: img3, title: "" },
-              { src: img4, title: "" },
-              { src: img5, title: "" },
-              { src: img6, title: "" },
-              { src: img7, title: "" },
-              { src: img8, title: "" },
-              { src: img9, title: "" },
-              { src: img10, title: "" },
-              { src: img11, title: "" },
+              { src: timg1, title: "" },
+              { src: timg2, title: "" },
+              { src: timg3, title: "" },
+              { src: timg4, title: "" },
+              { src: timg5, title: "" },
+              { src: timg6, title: "" },
+              { src: timg7, title: "" },
+              { src: timg8, title: "" },
+              { src: timg9, title: "" },
+              { src: timg10, title: "" },
+              { src: timg11, title: "" },
             ]}
+            onItemClick={(item) => setZoomedImage(item.src)}
             defaultActiveIndex={5}
             loop={true}
             autoPlay={true}
@@ -670,18 +697,19 @@ const HomePage = ({ show, setCurrentPage }) => {
           />
           <PerspectiveCarousel
             items={[
-              { src: img1, title: "" },
-              { src: img2, title: "" },
-              { src: img3, title: "" },
-              { src: img4, title: "" },
-              { src: img5, title: "" },
-              { src: img6, title: "" },
-              { src: img7, title: "" },
-              { src: img8, title: "" },
-              { src: img9, title: "" },
-              { src: img10, title: "" },
-              { src: img11, title: "" },
+              { src: timg12, title: "" },
+              { src: timg13, title: "" },
+              { src: timg14, title: "" },
+              { src: timg15, title: "" },
+              { src: timg16, title: "" },
+              { src: timg17, title: "" },
+              { src: timg18, title: "" },
+              { src: timg19, title: "" },
+              { src: timg20, title: "" },
+              { src: timg21, title: "" },
+              { src: timg22, title: "" },
             ]}
+            onItemClick={(item) => setZoomedImage(item.src)}
             defaultActiveIndex={5}
             loop={true}
             autoPlay={true}
@@ -707,6 +735,59 @@ const HomePage = ({ show, setCurrentPage }) => {
           <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
       </div>
+
+      {/* Zoomed Image Modal */}
+      {zoomedImage && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            zIndex: 999999,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            cursor: 'zoom-out'
+          }}
+          onClick={() => setZoomedImage(null)}
+        >
+          <button 
+            onClick={() => setZoomedImage(null)}
+            style={{
+              position: 'absolute',
+              top: '20px',
+              right: '30px',
+              background: 'transparent',
+              border: 'none',
+              color: 'white',
+              fontSize: '3rem',
+              cursor: 'pointer',
+              zIndex: 1000000,
+              lineHeight: 1
+            }}
+          >
+            &times;
+          </button>
+          <img 
+            src={zoomedImage} 
+            alt="Zoomed" 
+            style={{
+              maxWidth: '90%',
+              maxHeight: '90vh',
+              objectFit: 'contain',
+              borderRadius: '8px',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+              cursor: 'default'
+            }}
+            onClick={(e) => e.stopPropagation()} 
+          />
+        </div>
+      )}
     </div>
   );
 };
